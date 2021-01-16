@@ -1,0 +1,23 @@
+name: Laravel Base Classes CI
+
+on:
+  push:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    if: "! contains(toJSON(github.event.commits.*.message), '[skip-ci]')"
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - uses: "ramsey/composer-install@v1"
+
+    # - name: Run linting
+    #   run: composer run-script check-style
+
+    - name: Run static analysis
+      run: composer run-script stan
+
+    - name: Run test suite
+      run: composer run-script test -- --stop-on-failure

@@ -1,0 +1,51 @@
+{
+    "name": "thtg88/laravel-base-classes",
+    "description": "A set of useful Laravel classes to be used during everyday development.",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Marco Marassi",
+            "email": "thtg88@users.noreply.github.com"
+        }
+    ],
+    "require": {
+        "php": "^7.4|^8.0",
+        "laravel/framework": "^8.22",
+        "ramsey/uuid": "^4.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5",
+        "friendsofphp/php-cs-fixer": "^2.17",
+        "brainmaestro/composer-git-hooks": "^2.8",
+        "phpstan/phpstan": "^0.12.67",
+        "orchestra/testbench": "^6.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "Thtg88\\LaravelBaseClasses\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Thtg88\\LaravelBaseClasses\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Thtg88\\LaravelBaseClasses\\LaravelBaseClassesServiceProvider"
+            ]
+        }
+    },
+    "scripts": {
+        "ci": [
+            "@stan",
+            "@test --stop-on-failure"
+        ],
+        "check-style": "vendor/bin/php-cs-fixer fix --using-cache=no --diff --dry-run",
+        "fix-style": "vendor/bin/php-cs-fixer fix --using-cache=no",
+        "stan": "vendor/bin/phpstan analyse src",
+        "test": "vendor/bin/phpunit"
+    }
+}
