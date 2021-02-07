@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Contracts;
+namespace Thtg88\LaravelBaseClasses\Http\Requests\Contracts;
 
 interface RestoreRequestInterface extends RequestInterface
 {
