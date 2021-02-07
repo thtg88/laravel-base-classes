@@ -28,11 +28,11 @@ return [
 
     'pagination' => [
         'columns' => [
-            env('APP_PAGINATION_COLUMNS', '*')
+            env('LARAVEL_BASE_PAGINATION_COLUMNS', '*')
         ],
 
-        'page_name' => env('APP_PAGINATION_PAGE_NAME', 'page'),
+        'page_name' => env('LARAVEL_BASE_PAGINATION_PAGE_NAME', 'page'),
 
-        'page_size' => env('APP_PAGINATION_PAGE_SIZE', 10),
+        'page_size' => env('LARAVEL_BASE_PAGINATION_PAGE_SIZE', 10),
     ],
 ];
