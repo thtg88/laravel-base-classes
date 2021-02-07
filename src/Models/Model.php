@@ -22,11 +22,6 @@ class Model extends BaseModel
         'updated_at' => 'datetime',
     ];
 
-    public function getAppends(): array
-    {
-        return $this->appends;
-    }
-
     // RELATIONSHIPS
 
     public function journal_entries(): MorphMany
