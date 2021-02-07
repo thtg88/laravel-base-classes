@@ -3,6 +3,9 @@
 namespace Thtg88\LaravelBaseClasses\Repositories;
 
 use DateTime;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 interface RepositoryInterface
 {
@@ -18,28 +21,28 @@ interface RepositoryInterface
      *
      * @return array
      */
-    public function getDefaultFilterColumns();
+    public function getDefaultFilterColumns(): array;
 
     /**
      * Return the default columns to order by the repository model.
      *
      * @return array
      */
-    public function getDefaultOrderByColumns();
+    public function getDefaultOrderByColumns(): array;
 
     /**
      * Return the default columns to search by the repository model.
      *
      * @return array
      */
-    public function getDefaultSearchColumns();
+    public function getDefaultSearchColumns(): array;
 
     /**
      * Return all the model instances.
      *
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function all();
+    public function all(): Collection;
 
     /**
      * Return all the model instances in a compact array form:
@@ -47,7 +50,7 @@ interface RepositoryInterface
      *
      * @return array
      */
-    public function allCompact();
+    public function allCompact(): array;
 
     /**
      * Create a new model instance in storage from the given data array.
@@ -55,7 +58,7 @@ interface RepositoryInterface
      * @param array $data
      * @return \Illuminate\Database\Eloquent\Model
      */
-    public function create(array $data);
+    public function create(array $data): ?Model;
 
     /**
      * Deletes a model instance from a given id.
@@ -63,7 +66,7 @@ interface RepositoryInterface
      * @param int $id The id of the model.
      * @return \Illuminate\Database\Eloquent\Model
      */
-    public function destroy($id);
+    public function destroy(int $id): ?Model;
 
     /**
      * Returns a model from a given id.
@@ -71,7 +74,7 @@ interface RepositoryInterface
      * @param int $id The id of the instance.
      * @return \Illuminate\Database\Eloquent\Model
      */
-    public function find($id);
+    public function find(int $id): ?Model;
 
     /**
      * Returns a model from a given model name.
@@ -80,28 +83,28 @@ interface RepositoryInterface
      * @return \Illuminate\Database\Eloquent\Model
      * @TODO expand to include multiple column functionality. Perhaps allow array, with separator additional parameter, or closure.
      */
-    public function findByModelName($model_name);
+    public function findByModelName($model_name): ?Model;
 
     /**
      * Returns the first model.
      *
      * @return \Illuminate\Database\Eloquent\Model
      */
-    public function findFirst();
+    public function findFirst(): ?Model;
 
     /**
      * Returns a random model instance.
      *
      * @return \Illuminate\Database\Eloquent\Model
      */
-    public function findRandom();
+    public function findRandom(): ?Model;
 
     /**
      * Return all the model instances' ids.
      *
      * @return array
      */
-    public function getAllIds();
+    public function getAllIds(): array;
 
     /**
      * Return all the resources from given ids.
@@ -109,7 +112,7 @@ interface RepositoryInterface
      * @param int $ids The ids of the resources to return.
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function getByIds(array $ids);
+    public function getByIds(array $ids): Collection;
 
     /**
      * Return all the resources between a given start and end date.
@@ -130,7 +133,7 @@ interface RepositoryInterface
     public function getByStartDateAndEndDate(
         DateTime $start_date,
         DateTime $end_date
-    );
+    ): Collection;
 
     /**
      * Return the given number of latest inserted model instances.
@@ -138,27 +141,27 @@ interface RepositoryInterface
      * @param int $limit The number of model instances to return.
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function latest($limit);
+    public function latest(int $limit): Collection;
 
     /**
      * Return the paginated model instances.
      *
      * @param int $page_size The number of model instances to return per page
-     * @param int $page The page number
+     * @param int|null $page The page number
      * @param string $q The optional search query
-     * @param string $sort_column The optional sort column
-     * @param string $sort_direction The optional sort direction
+     * @param string|null $sort_column The optional sort column
+     * @param string|null $sort_direction The optional sort direction
      * @param array $wheres Additional where clauses
-     * @return \Illuminate\Support\Collection
+     * @return \Illuminate\Pagination\LengthAwarePaginator
      */
     public function paginate(
-        $page_size = 10,
-        $page = null,
-        $q = null,
-        $sort_column = null,
-        $sort_direction = null,
+        int $page_size = 10,
+        ?int $page = null,
+        ?string $q = null,
+        ?string $sort_column = null,
+        ?string $sort_direction = null,
         array $wheres = []
-    );
+    ): LengthAwarePaginator;
 
     /**
      * Restore a model instance from a given id.
@@ -166,15 +169,15 @@ interface RepositoryInterface
      * @param int $id The id of the model
      * @return \Illuminate\Database\Eloquent\Model
      */
-    public function restore($id);
+    public function restore(int $id): ?Model;
 
     /**
      * Return the model instances matching the given search query.
      *
-     * @param string $q The search query.
+     * @param string|null $q The search query.
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function search($q);
+    public function search(?string $q): Collection;
 
     /**
      * Updates a model instance with given data, from a given id.
@@ -183,5 +186,5 @@ interface RepositoryInterface
      * @param array $data
      * @return \Illuminate\Database\Eloquent\Model
      */
-    public function update($id, array $data);
+    public function update(int $id, array $data): ?Model;
 }

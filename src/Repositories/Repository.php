@@ -5,19 +5,16 @@ namespace Thtg88\LaravelBaseClasses\Repositories;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
 
-/**
- *
- */
 class Repository implements RepositoryInterface
 {
-    use Concerns\WithAllModels,
-        Concerns\WithCreate,
-        Concerns\WithDestroy,
-        Concerns\WithFind,
-        Concerns\WithGet,
-        Concerns\WithPagination,
-        Concerns\WithSearch,
-        Concerns\WithUpdate;
+    use Concerns\WithAllModels;
+    use Concerns\WithCreate;
+    use Concerns\WithDestroy;
+    use Concerns\WithFind;
+    use Concerns\WithGet;
+    use Concerns\WithPagination;
+    use Concerns\WithSearch;
+    use Concerns\WithUpdate;
 
     /**
      * The repository model.
@@ -83,9 +80,7 @@ class Repository implements RepositoryInterface
         $target_type = $this->model->getTable();
 
         // Merge into morph map for accessibility across the App when retrieving
-        Relation::morphMap([
-            $target_type => $classname,
-        ]);
+        Relation::morphMap([$target_type => $classname]);
 
         // Omit trashed model by default
         $this->with_trashed = false;
@@ -146,7 +141,7 @@ class Repository implements RepositoryInterface
      *
      * @return self
      */
-    public function withGlobalScope($scope_classname)
+    public function withGlobalScope($scope_classname): self
     {
         $this->model = $this->model->withGlobalScope(
             $scope_classname,
@@ -161,7 +156,7 @@ class Repository implements RepositoryInterface
      *
      * @return self
      */
-    public function withoutGlobalScope($scope_classname)
+    public function withoutGlobalScope($scope_classname): self
     {
         $this->model = $this->model->withoutGlobalScope($scope_classname);
 
@@ -173,7 +168,7 @@ class Repository implements RepositoryInterface
      *
      * @return self
      */
-    public function withTrashed()
+    public function withTrashed(): self
     {
         $this->with_trashed = true;
 
@@ -185,7 +180,7 @@ class Repository implements RepositoryInterface
      *
      * @return self
      */
-    public function withoutTrashed()
+    public function withoutTrashed(): self
     {
         $this->with_trashed = false;
 
@@ -199,20 +194,20 @@ class Repository implements RepositoryInterface
      * @param \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model $builder
      * @return \Illuminate\Database\Query\Builder
      */
-    protected function withDefaultOrderBy($bulder)
+    protected function withDefaultOrderBy($builder)
     {
         if (
             ! is_array(static::$order_by_columns) ||
             count(static::$order_by_columns) === 0
         ) {
-            return $bulder;
+            return $builder;
         }
 
         foreach (static::$order_by_columns as $order_by_column => $direction) {
-            $bulder = $bulder->orderBy($order_by_column, $direction);
+            $builder = $builder->orderBy($order_by_column, $direction);
         }
 
-        return $bulder;
+        return $builder;
     }
 
     /**
@@ -227,15 +222,7 @@ class Repository implements RepositoryInterface
         // Get a list of traits used by the class
         $class_uses = class_uses($this->model);
 
-        // We assume all models use SoftDeletes,
-        // as it's defined in our Model class
-        // The array check below will return false
-        // as class_uses does not check the parent class
-        // (where SoftDeletes will be imported)
-        if (
-            $this->with_trashed === true
-            // && in_array('Illuminate\Database\Eloquent\SoftDeletes', $class_uses)
-        ) {
+        if ($this->with_trashed === true) {
             $builder = $builder->withTrashed();
         }
 
