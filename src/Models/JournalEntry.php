@@ -9,13 +9,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class JournalEntry extends Model
 {
     /**
-     * The table associated with the model.
-     *
-     * @var string
-     */
-    protected $table = 'journal_entries';
-
-    /**
      * The attributes that are mass assignable.
      *
      * @var array
