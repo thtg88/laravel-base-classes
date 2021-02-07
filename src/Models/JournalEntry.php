@@ -2,7 +2,6 @@
 
 namespace Thtg88\LaravelBaseClasses\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
