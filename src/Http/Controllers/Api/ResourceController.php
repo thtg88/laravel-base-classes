@@ -2,37 +2,20 @@
 
 namespace Thtg88\LaravelBaseClasses\Http\Controllers\Api;
 
-use Thtg88\LaravelBaseClasses\Http\Controllers\Controller;
+use Thtg88\LaravelBaseClasses\Http\Controllers\ResourceController as BaseResourceController;
 use Thtg88\LaravelBaseClasses\Http\Requests\Contracts\DestroyRequestInterface;
 use Thtg88\LaravelBaseClasses\Http\Requests\Contracts\IndexRequestInterface;
 use Thtg88\LaravelBaseClasses\Http\Requests\Contracts\ShowRequestInterface;
 use Thtg88\LaravelBaseClasses\Http\Requests\Contracts\StoreRequestInterface;
 use Thtg88\LaravelBaseClasses\Http\Requests\Contracts\UpdateRequestInterface;
 
-class ApiResourceController extends Controller
+class ResourceController extends BaseResourceController
 {
-    /**
-     * The service implementation.
-     *
-     * @var \App\Http\Requests\Contracts\ResourceServiceInterface
-     */
-    protected $service;
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->addBindings();
-    }
-
     /**
      * Remove the specified resource from storage.
      *
      * @param \Thtg88\LaravelBaseClasses\\Http\Requests\Contracts\DestroyRequestInterface $request
-     * @param int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy(DestroyRequestInterface $request, $id)
@@ -64,7 +47,7 @@ class ApiResourceController extends Controller
      * Display the specified resource.
      *
      * @param \Thtg88\LaravelBaseClasses\\Http\Requests\Contracts\ShowRequestInterface $request
-     * @param int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show(ShowRequestInterface $request, $id)
@@ -102,7 +85,7 @@ class ApiResourceController extends Controller
      * Update the specified resource in storage.
      *
      * @param \Thtg88\LaravelBaseClasses\\Http\Requests\Contracts\UpdateRequestInterface $request
-     * @param int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateRequestInterface $request, $id)
@@ -114,13 +97,5 @@ class ApiResourceController extends Controller
             'success', true,
             'resource', $resource,
         ]);
-    }
-
-    /**
-     * Return the service name.
-     */
-    protected function getServiceName()
-    {
-        return $this->service->getName();
     }
 }

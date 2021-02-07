@@ -2,46 +2,31 @@
 
 namespace Thtg88\LaravelBaseClasses\Http\Controllers;
 
+use Closure;
+use Illuminate\Container\Container;
+use Illuminate\Support\Str;
 use Thtg88\LaravelBaseClasses\Helpers\DownloadCsvHelper;
+use Thtg88\LaravelBaseClasses\Http\Controllers\ResourceController as BaseResourceController;
 use Thtg88\LaravelBaseClasses\Http\Requests\Contracts\DestroyRequestInterface;
 use Thtg88\LaravelBaseClasses\Http\Requests\Contracts\StoreRequestInterface;
 use Thtg88\LaravelBaseClasses\Http\Requests\Contracts\UpdateRequestInterface;
 use Thtg88\LaravelBaseClasses\Http\Requests\DownloadCsvRequest;
-use Illuminate\Container\Container;
-use Illuminate\Support\Str;
 
-class WebResourceController extends Controller
+class ResourceController extends BaseResourceController
 {
     /**
      * The csv header row callback implementation.
      *
      * @var \Closure
      */
-    protected $csv_header_row_callback;
+    protected Closure $csv_header_row_callback;
 
     /**
      * The csv row callback implementation.
      *
      * @var \Closure
      */
-    protected $csv_row_callback;
-
-    /**
-     * The service implementation.
-     *
-     * @var \App\Http\Requests\Contracts\ResourceServiceInterface
-     */
-    protected $service;
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->addBindings();
-    }
+    protected Closure $csv_row_callback;
 
     /**
      * Remove the specified resource from storage.
@@ -125,31 +110,21 @@ class WebResourceController extends Controller
     }
 
     /**
-     * Return the service name.
-     *
-     * @return string
-     */
-    protected function getServiceName()
-    {
-        return $this->service->getName();
-    }
-
-    /**
      * Return the base route.
      *
      * @return string
      */
-    protected function getBaseRoute()
+    protected function getBaseRoute(): string
     {
         return Str::slug($this->getServiceName());
     }
 
     /**
-     * Return the base route.
+     * Return the views base folder.
      *
      * @return string
      */
-    protected function getViewBaseFolder()
+    protected function getViewBaseFolder(): string
     {
         return Str::slug($this->getServiceName());
     }
