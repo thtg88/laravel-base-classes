@@ -24,18 +24,16 @@ class JournalEntry extends Model
     ];
 
     /**
-     * The attributes that should be visible in arrays.
+     * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $visible = [
-        'action',
-        'content',
-        'created_at',
-        'id',
-        'target',
-        'target_id',
-        'user_id',
+    protected $casts = [
+        'created_at' => 'datetime',
+        'deleted_at' => 'datetime',
+        'target_id' => 'integer',
+        'updated_at' => 'datetime',
+        'user_id' => 'integer',
     ];
 
     // RELATIONSHIPS
