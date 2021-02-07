@@ -22,7 +22,7 @@ class JournalEntryHelper
     /**
      * Create a new helper instance.
      *
-     * @param \Thtg88\LaravelBaseClasses\\Repositories\JournalEntryRepository $journal_entries
+     * @param \Thtg88\LaravelBaseClasses\Repositories\JournalEntryRepository $journal_entries
      * @return void
      */
     public function __construct(JournalEntryRepository $journal_entries)
@@ -36,13 +36,15 @@ class JournalEntryHelper
      * @param string $action The action performing while creating the entry.
      * @param Illuminate\Database\Eloquent\Model|null $model The model the action is performed on.
      * @param array $content The action content data.
-     * @return \Thtg88\LaravelBaseClasses\\Models\JournalEntry
+     * @return \Thtg88\LaravelBaseClasses\Models\JournalEntry
      */
     public function createJournalEntry(
         $action,
         ?Model $model,
         array $content = null
     ): JournalEntry {
+        $target_table = null;
+        $id = null;
         if ($model !== null) {
             // Get model class name
             $class_name = get_class($model);
@@ -57,9 +59,6 @@ class JournalEntryHelper
             }
 
             $id = $model->id;
-        } else {
-            $target_table = null;
-            $id = null;
         }
 
         // Get current authenticated user
