@@ -10,7 +10,7 @@ trait WithArchive
     /**
      * Archive the specified resource in storage.
      *
-     * @param \Thtg88\LaravelBaseClasses\\Http\Requests\Contracts\ArchiveRequestInterface $request
+     * @param \Thtg88\LaravelBaseClasses\Http\Requests\Contracts\ArchiveRequestInterface $request
      * @param int $id
      * @return \Illuminate\Http\Response
      */
@@ -26,7 +26,7 @@ trait WithArchive
     /**
      * Remove the specified resource in storage from archive.
      *
-     * @param \Thtg88\LaravelBaseClasses\\Http\Requests\Contracts\UnarchiveRequestInterface $request
+     * @param \Thtg88\LaravelBaseClasses\Http\Requests\Contracts\UnarchiveRequestInterface $request
      * @param int $id
      * @return \Illuminate\Http\Response
      */

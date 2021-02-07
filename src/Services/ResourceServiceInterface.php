@@ -14,7 +14,7 @@ interface ResourceServiceInterface
     /**
      * Deletes a model instance from a given id.
      *
-     * @param \Thtg88\LaravelBaseClasses\\Http\Requests\Contracts\DestroyRequestInterface $request
+     * @param \Thtg88\LaravelBaseClasses\Http\Requests\Contracts\DestroyRequestInterface $request
      * @param int $id The id of the model.
      * @return \Illuminate\Database\Eloquent\Model
      */
@@ -30,7 +30,7 @@ interface ResourceServiceInterface
     /**
      * Return all the model instances.
      *
-     * @param \Thtg88\LaravelBaseClasses\\Http\Requests\Contracts\IndexRequestInterface $request
+     * @param \Thtg88\LaravelBaseClasses\Http\Requests\Contracts\IndexRequestInterface $request
      * @return \Illuminate\Support\Collection
      */
     public function index(IndexRequestInterface $request);
@@ -38,7 +38,7 @@ interface ResourceServiceInterface
     /**
      * Restore a model instance from a given id.
      *
-     * @param \Thtg88\LaravelBaseClasses\\Http\Requests\Contracts\RestoreRequestInterface $request
+     * @param \Thtg88\LaravelBaseClasses\Http\Requests\Contracts\RestoreRequestInterface $request
      * @param int $id The id of the model
      * @return \Illuminate\Database\Eloquent\Model
      */
@@ -47,7 +47,7 @@ interface ResourceServiceInterface
     /**
      * Return the model instances matching the given search query.
      *
-     * @param \Thtg88\LaravelBaseClasses\\Http\Requests\Contracts\SearchRequestInterface $request
+     * @param \Thtg88\LaravelBaseClasses\Http\Requests\Contracts\SearchRequestInterface $request
      * @return \Illuminate\Support\Collection
      */
     public function search(SearchRequestInterface $request);
@@ -63,7 +63,7 @@ interface ResourceServiceInterface
     /**
      * Create a new model instance in storage from the given data array.
      *
-     * @param \Thtg88\LaravelBaseClasses\\Http\Requests\Contracts\StoreRequestInterface $request
+     * @param \Thtg88\LaravelBaseClasses\Http\Requests\Contracts\StoreRequestInterface $request
      * @return \Illuminate\Database\Eloquent\Model
      */
     public function store(StoreRequestInterface $request);
@@ -71,7 +71,7 @@ interface ResourceServiceInterface
     /**
      * Updates a model instance with given data, from a given id.
      *
-     * @param \Thtg88\LaravelBaseClasses\\Http\Requests\Contracts\UpdateRequestInterface $request
+     * @param \Thtg88\LaravelBaseClasses\Http\Requests\Contracts\UpdateRequestInterface $request
      * @param int $id The id of the model
      * @return \Illuminate\Database\Eloquent\Model
      */

@@ -27,7 +27,7 @@ class ResourceService implements ResourceServiceInterface
     /**
      * Deletes a model instance from a given id.
      *
-     * @param \Thtg88\LaravelBaseClasses\\Http\Requests\Contracts\DestroyRequestInterface $request
+     * @param \Thtg88\LaravelBaseClasses\Http\Requests\Contracts\DestroyRequestInterface $request
      * @param int $id The id of the model.
      * @return \Illuminate\Database\Eloquent\Model
      */
@@ -65,7 +65,7 @@ class ResourceService implements ResourceServiceInterface
     /**
      * Return the service name.
      *
-     * @return \Thtg88\LaravelBaseClasses\\Repositories\Repository
+     * @return \Thtg88\LaravelBaseClasses\Repositories\Repository
      */
     public function getRepository(): Repository
     {
@@ -75,7 +75,7 @@ class ResourceService implements ResourceServiceInterface
     /**
      * Return all the model instances.
      *
-     * @param \Thtg88\LaravelBaseClasses\\Http\Requests\Contracts\IndexRequestInterface $request
+     * @param \Thtg88\LaravelBaseClasses\Http\Requests\Contracts\IndexRequestInterface $request
      * @return \Illuminate\Pagination\LengthAwarePaginator
      */
     public function index(IndexRequestInterface $request): LengthAwarePaginator
@@ -143,7 +143,7 @@ class ResourceService implements ResourceServiceInterface
     /**
      * Restore a model instance from a given id.
      *
-     * @param \Thtg88\LaravelBaseClasses\\Http\Requests\Contracts\RestoreRequestInterface $request
+     * @param \Thtg88\LaravelBaseClasses\Http\Requests\Contracts\RestoreRequestInterface $request
      * @param int $id The id of the model
      * @return \Illuminate\Database\Eloquent\Model
      */
@@ -155,7 +155,7 @@ class ResourceService implements ResourceServiceInterface
     /**
      * Return the model instances matching the given search query.
      *
-     * @param \Thtg88\LaravelBaseClasses\\Http\Requests\Contracts\SearchRequestInterface $request
+     * @param \Thtg88\LaravelBaseClasses\Http\Requests\Contracts\SearchRequestInterface $request
      * @return \Illuminate\Database\Eloquent\Collection
      */
     public function search(SearchRequestInterface $request): Collection
@@ -180,7 +180,7 @@ class ResourceService implements ResourceServiceInterface
     /**
      * Create a new model instance in storage from the given request.
      *
-     * @param \Thtg88\LaravelBaseClasses\\Http\Requests\Contracts\StoreRequestInterface $request
+     * @param \Thtg88\LaravelBaseClasses\Http\Requests\Contracts\StoreRequestInterface $request
      * @return \Illuminate\Database\Eloquent\Model
      */
     public function store(StoreRequestInterface $request)
@@ -194,7 +194,7 @@ class ResourceService implements ResourceServiceInterface
     /**
      * Updates a model instance with given request, and id.
      *
-     * @param \Thtg88\LaravelBaseClasses\\Http\Requests\Contracts\UpdateRequestInterface $request
+     * @param \Thtg88\LaravelBaseClasses\Http\Requests\Contracts\UpdateRequestInterface $request
      * @param int $id The id of the model
      * @return \Illuminate\Database\Eloquent\Model
      */

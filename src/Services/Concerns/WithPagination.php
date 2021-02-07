@@ -9,7 +9,7 @@ trait WithPagination
     /**
      * Return the map of filter values from a given request.
      *
-     * @param \Thtg88\LaravelBaseClasses\\Http\Requests\Contracts\IndexRequestInterface $request
+     * @param \Thtg88\LaravelBaseClasses\Http\Requests\Contracts\IndexRequestInterface $request
      * @return array
      */
     public function getMapFilterValues(IndexRequestInterface $request): array
@@ -58,7 +58,7 @@ trait WithPagination
     /**
      * Return the filter values from a given request.
      *
-     * @param \Thtg88\LaravelBaseClasses\\Http\Requests\Contracts\IndexRequestInterface $request
+     * @param \Thtg88\LaravelBaseClasses\Http\Requests\Contracts\IndexRequestInterface $request
      * @return array
      */
     public function getFilterValues(IndexRequestInterface $request): array
@@ -108,7 +108,7 @@ trait WithPagination
     /**
      * Return the search value from a given request.
      *
-     * @param \Thtg88\LaravelBaseClasses\\Http\Requests\Contracts\IndexRequestInterface $request
+     * @param \Thtg88\LaravelBaseClasses\Http\Requests\Contracts\IndexRequestInterface $request
      * @return string|null
      */
     public function getSearchValue(IndexRequestInterface $request): ?string
@@ -123,7 +123,7 @@ trait WithPagination
     /**
      * Return the page size value from a given request.
      *
-     * @param \Thtg88\LaravelBaseClasses\\Http\Requests\Contracts\IndexRequestInterface $request
+     * @param \Thtg88\LaravelBaseClasses\Http\Requests\Contracts\IndexRequestInterface $request
      * @return int|null
      */
     public function getPageSize(IndexRequestInterface $request): int
@@ -141,7 +141,7 @@ trait WithPagination
     /**
      * Return the sort from a given request.
      *
-     * @param \Thtg88\LaravelBaseClasses\\Http\Requests\Contracts\IndexRequestInterface $request
+     * @param \Thtg88\LaravelBaseClasses\Http\Requests\Contracts\IndexRequestInterface $request
      * @return array
      */
     public function getSort(IndexRequestInterface $request): array
@@ -179,7 +179,7 @@ trait WithPagination
     /**
      * Return the pagination data from a given request.
      *
-     * @param \Thtg88\LaravelBaseClasses\\Http\Requests\Contracts\IndexRequestInterface $request
+     * @param \Thtg88\LaravelBaseClasses\Http\Requests\Contracts\IndexRequestInterface $request
      * @return array
      */
     public function getPaginationData(IndexRequestInterface $request): array
