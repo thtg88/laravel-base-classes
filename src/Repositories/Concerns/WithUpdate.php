@@ -14,11 +14,10 @@ trait WithUpdate
      * @param array $data
      * @return \Illuminate\Database\Eloquent\Model
      */
-    public function update($id, array $data)
+    public function update(int $id, array $data): ?Model
     {
         // Get model
         $model = $this->find($id);
-
         if ($model === null) {
             return null;
         }
@@ -26,25 +25,24 @@ trait WithUpdate
         // Get rid of unnecessary data e.g. not changed or not in the model
         $data = $this->pruneData($data, $model);
 
+        // No data changed - No need to fire an update
         if (count($data) === 0) {
-            // No data changed - No need to fire an update
             return $model;
         }
 
         // Save data
         $model->fill($data)->save();
 
-        if (config('app.journal_mode') === true) {
-            // Create journal entry only if not creating journal entry i.e. infinite recursion
-            $journal_entry_classname = JournalEntry::class;
-
-            if ($model instanceof $journal_entry_classname === false) {
-                app('JournalEntryHelper')->createJournalEntry(
-                    null,
-                    $model,
-                    $data
-                );
-            }
+        // Create journal entry only if not creating journal entry i.e. infinite recursion
+        if (
+            config('base-classes.journal_mode') === true &&
+            ! ($model instanceof JournalEntry)
+        ) {
+            app('JournalEntryHelper')->createJournalEntry(
+                null,
+                $model,
+                $data
+            );
         }
 
         // Get model key name
@@ -86,11 +84,14 @@ trait WithUpdate
         $data = array_diff_key($data, array_flip($exclude));
 
         foreach ($data as $column => $value) {
+            // If there is no such column in the original model - discard
             if (! array_key_exists($column, $model_values)) {
-                // If there is no such column in the original model - discard
                 unset($data[$column]);
-            } elseif ($model_values[$column] == $value) {
-                // If the 2 values are the same - discard
+                continue;
+            }
+
+            // If the 2 values are the same - discard
+            if ($model_values[$column] == $value) {
                 unset($data[$column]);
             }
         }

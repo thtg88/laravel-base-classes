@@ -2,6 +2,7 @@
 
 namespace Thtg88\LaravelBaseClasses\Repositories\Concerns;
 
+use Illuminate\Database\Eloquent\Model;
 use Thtg88\LaravelBaseClasses\Models\JournalEntry;
 
 trait WithDestroy
@@ -10,38 +11,24 @@ trait WithDestroy
      * Deletes a model instance from a given id.
      *
      * @param int $id The id of the model.
-     * @return \Illuminate\Database\Eloquent\Model
+     * @return \Illuminate\Database\Eloquent\Model|null
      */
-    public function destroy($id)
+    public function destroy($id): ?Model
     {
         // Get model
         $model = $this->find($id);
-
         if ($model === null) {
             return null;
         }
 
         $model->delete();
 
-        // Check if a model uses soft deletes, so I can log into journal
-        // We assume all models use SoftDeletes,
-        // as it's defined in our Model class
-        // The array check below will return false
-        // as class_uses does not check the parent class
-        // (where SoftDeletes will be imported)
-        // if (
-        //     in_array(
-        //         'Illuminate\Database\Eloquent\SoftDeletes',
-        //         class_uses($this->model)
-        //     )
-        // ) {
-        if (config('app.journal_mode') === true) {
+        if (config('base-classes.journal_mode') === true) {
             app('JournalEntryHelper')->createJournalEntry(
                 'delete',
                 $model
             );
         }
-        // }
 
         return $model;
     }
@@ -56,36 +43,16 @@ trait WithDestroy
     public function destroyBulk(array $ids): int
     {
         // Assume site id numeric, not empty and > 0
-        $ids = array_filter(
-            $ids,
-            static function ($id) {
-                return (
-                    ! empty($id) &&
-                    is_numeric($id) &&
-                    $id > 0
-                );
-            }
-        );
+        $ids = array_filter($ids, static function ($id): bool {
+            return ! empty($id) && is_numeric($id) && $id > 0;
+        });
         if (count($ids) === 0) {
             return 0;
         }
 
-        $response = $this->model->whereIn('id', $ids)
-            ->delete();
+        $response = $this->model->whereIn('id', $ids)->delete();
 
-        // Check if a model uses soft deletes, so I can log into journal
-        // We assume all models use SoftDeletes,
-        // as it's defined in our Model class
-        // The array check below will return false
-        // as class_uses does not check the parent class
-        // (where SoftDeletes will be imported)
-        // if (
-        //     in_array(
-        //         'Illuminate\Database\Eloquent\SoftDeletes',
-        //         class_uses($this->model)
-        //     )
-        // ) {
-        if (config('app.journal_mode') === true) {
+        if (config('base-classes.journal_mode') === true) {
             app('JournalEntryHelper')->createJournalEntry(
                 'delete-bulk',
                 null,
@@ -95,7 +62,6 @@ trait WithDestroy
                 ]
             );
         }
-        // }
 
         return $response;
     }
@@ -104,40 +70,30 @@ trait WithDestroy
      * Restore a model instance from a given id.
      *
      * @param int $id The id of the model
-     * @return \Illuminate\Database\Eloquent\Model
+     * @return \Illuminate\Database\Eloquent\Model|null
      */
-    public function restore($id)
+    public function restore($id): ?Model
     {
         // Get model
         $model = $this->find($id);
-
         if ($model === null) {
             return null;
         }
 
-        // We assume all models use SoftDeletes,
-        // as it's defined in our Model class
-        // The array check below will return false
-        // as class_uses does not check the parent class
-        // (where SoftDeletes will be imported)
-        // if (in_array('Illuminate\Database\Eloquent\SoftDeletes', class_uses($this->model)))
-        // {
         // Restore model
         $model->restore();
 
-        if (config('app.journal_mode') === true) {
-            // Create journal entry only if not creating journal entry i.e. infinite recursion
-            $journal_entry_classname = JournalEntry::class;
-
-            if ($model instanceof $journal_entry_classname === false) {
-                app('JournalEntryHelper')->createJournalEntry(
-                    'restore',
-                    $model,
-                    []
-                );
-            }
+        // Create journal entry only if not creating journal entry i.e. infinite recursion
+        if (
+            config('base-classes.journal_mode') === true &&
+            ! ($model instanceof JournalEntry)
+        ) {
+            app('JournalEntryHelper')->createJournalEntry(
+                'restore',
+                $model,
+                []
+            );
         }
-        // }
 
         return $model;
     }

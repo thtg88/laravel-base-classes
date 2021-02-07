@@ -2,15 +2,17 @@
 
 namespace Thtg88\LaravelBaseClasses\Repositories\Concerns;
 
+use Illuminate\Database\Eloquent\Model;
+
 trait WithFind
 {
     /**
      * Returns a model from a given id.
      *
      * @param int $id The id of the instance.
-     * @return \Illuminate\Database\Eloquent\Model
+     * @return \Illuminate\Database\Eloquent\Model|null
      */
-    public function find($id)
+    public function find($id): ?Model
     {
         // Assume id as numeric and > 0
         if (empty($id) || ! is_numeric($id)) {
@@ -28,9 +30,9 @@ trait WithFind
     /**
      * Returns the first model.
      *
-     * @return \Illuminate\Database\Eloquent\Model
+     * @return \Illuminate\Database\Eloquent\Model|null
      */
-    public function findFirst()
+    public function findFirst(): ?Model
     {
         // Get model
         $result = $this->model->orderBy('id', 'asc');
@@ -43,9 +45,9 @@ trait WithFind
     /**
      * Returns the last model.
      *
-     * @return \Illuminate\Database\Eloquent\Model
+     * @return \Illuminate\Database\Eloquent\Model|null
      */
-    public function findLast()
+    public function findLast(): ?Model
     {
         // Get model
         $result = $this->model->orderBy('id', 'desc');
@@ -59,10 +61,10 @@ trait WithFind
      * Returns a model from a given model name.
      *
      * @param mixed $model_name The model name of the instance.
-     * @return \Illuminate\Database\Eloquent\Model
+     * @return \Illuminate\Database\Eloquent\Model|null
      * @TODO expand to include multiple column functionality. Perhaps allow array, with separator additional parameter, or closure.
      */
-    public function findByModelName($model_name)
+    public function findByModelName($model_name): ?Model
     {
         // Assume id as numeric and > 0
         if (empty($model_name) || ! isset(static::$model_name)) {
@@ -80,12 +82,11 @@ trait WithFind
     /**
      * Returns a random model instance.
      *
-     * @return \Illuminate\Database\Eloquent\Model
+     * @return \Illuminate\Database\Eloquent\Model|null
      */
-    public function findRandom()
+    public function findRandom(): ?Model
     {
         // Get model
-        return $this->model->inRandomOrder()
-            ->first();
+        return $this->model->inRandomOrder()->first();
     }
 }

@@ -28,12 +28,20 @@ trait WithPagination
     ): LengthAwarePaginator {
         // Assume page_size as numeric and > 0
         if (empty($page_size) || ! is_numeric($page_size) || $page_size < 1) {
-            return new Collection();
+            return new LengthAwarePaginator(
+                [],
+                0,
+                config('base-classes.pagination.page_size')
+            );
         }
 
         // Assume page as numeric and > 0
         if (! empty($page) && (! is_numeric($page) || $page < 1)) {
-            return new Collection();
+            return new LengthAwarePaginator(
+                [],
+                0,
+                config('base-classes.pagination.page_size')
+            );
         }
 
         $page_size = floor($page_size);
@@ -75,8 +83,8 @@ trait WithPagination
 
         return $result->paginate(
             $page_size,
-            config('app.pagination.columns'),
-            config('app.pagination.page_name'),
+            config('base-classes.pagination.columns'),
+            config('base-classes.pagination.page_name'),
             $page
         );
     }
@@ -104,89 +112,13 @@ trait WithPagination
         }
 
         if (isset($filter['relationship-field'])) {
-            $builder = $builder->with($filter['name']);
-
-            if (isset($filter['operator']) && $filter['operator'] === 'in') {
-                return $builder->whereHas(
-                    $filter['name'],
-                    static function ($query) use ($filter) {
-                        $query->whereIn(
-                            $filter['relationship-field'],
-                            $filter['value']
-                        );
-                    }
-                );
-            }
-
-            if ($filter['value'] === null) {
-                if (
-                    ! isset($filter['operator']) ||
-                    empty($filter['operator']) ||
-                    $filter['operator'] === '='
-                ) {
-                    return $builder->whereHas(
-                        $filter['name'],
-                        static function ($query) use ($filter) {
-                            $query->whereNull($filter['relationship-field']);
-                        }
-                    );
-                }
-
-                if (
-                    isset($filter['operator']) &&
-                    (
-                        $filter['operator'] === '<>' ||
-                        $filter['operator'] === '!='
-                    )
-                ) {
-                    return $builder->whereHas(
-                        $filter['name'],
-                        static function ($query) use ($filter) {
-                            $query->whereNotNull($filter['relationship-field']);
-                        }
-                    );
-                }
-
-                return $builder;
-            }
-
-            if (
-                array_key_exists('target_type', $filter) &&
-                is_string($filter['target_type'])
-            ) {
-                return $builder->whereHas(
-                    $filter['name'],
-                    static function ($query) use ($filter) {
-                        $query->where(
-                            $filter['relationship-field'],
-                            $filter['operator'],
-                            $filter['value']
-                        )->where(
-                            'target_type',
-                            $filter['target_type']
-                        );
-                    }
-                );
-            }
-
-            return $builder->whereHas(
-                $filter['name'],
-                static function ($query) use ($filter) {
-                    $query->where(
-                        $filter['relationship-field'],
-                        $filter['operator'],
-                        $filter['value']
-                    );
-                }
+            return $this->getWhereFilterRelationshipFieldQueryBuilder(
+                $builder,
+                $filter
             );
         }
 
-        if (
-            in_array(
-                $filter['name'],
-                $this->getModel()->getWith()
-            )
-        ) {
+        if (in_array($filter['name'], $this->getModel()->getWith())) {
             if (
                 isset($filter['operator']) &&
                 $filter['operator'] === 'in'
@@ -227,14 +159,8 @@ trait WithPagination
             return $builder;
         }
 
-        if (
-            isset($filter['operator']) &&
-            $filter['operator'] === 'in'
-        ) {
-            return $builder->whereIn(
-                $filter['name'],
-                $filter['value']
-            );
+        if (isset($filter['operator']) && $filter['operator'] === 'in') {
+            return $builder->whereIn($filter['name'], $filter['value']);
         }
 
         // TODO check here if valid field?
@@ -242,6 +168,85 @@ trait WithPagination
             $filter['name'],
             $filter['operator'] ?? '=',
             $filter['value']
+        );
+    }
+
+    protected function getWhereFilterRelationshipFieldQueryBuilder($builder, array $filter)
+    {
+        $builder = $builder->with($filter['name']);
+
+        if (isset($filter['operator']) && $filter['operator'] === 'in') {
+            return $builder->whereHas(
+                $filter['name'],
+                static function ($query) use ($filter) {
+                    $query->whereIn(
+                        $filter['relationship-field'],
+                        $filter['value']
+                    );
+                }
+            );
+        }
+
+        if ($filter['value'] === null) {
+            if (
+                ! isset($filter['operator']) ||
+                empty($filter['operator']) ||
+                $filter['operator'] === '='
+            ) {
+                return $builder->whereHas(
+                    $filter['name'],
+                    static function ($query) use ($filter) {
+                        $query->whereNull($filter['relationship-field']);
+                    }
+                );
+            }
+
+            if (
+                isset($filter['operator']) &&
+                (
+                    $filter['operator'] === '<>' ||
+                    $filter['operator'] === '!='
+                )
+            ) {
+                return $builder->whereHas(
+                    $filter['name'],
+                    static function ($query) use ($filter) {
+                        $query->whereNotNull($filter['relationship-field']);
+                    }
+                );
+            }
+
+            return $builder;
+        }
+
+        if (
+            array_key_exists('target_type', $filter) &&
+            is_string($filter['target_type'])
+        ) {
+            return $builder->whereHas(
+                $filter['name'],
+                static function ($query) use ($filter) {
+                    $query->where(
+                        $filter['relationship-field'],
+                        $filter['operator'],
+                        $filter['value']
+                    )->where(
+                        'target_type',
+                        $filter['target_type']
+                    );
+                }
+            );
+        }
+
+        return $builder->whereHas(
+            $filter['name'],
+            static function ($query) use ($filter) {
+                $query->where(
+                    $filter['relationship-field'],
+                    $filter['operator'],
+                    $filter['value']
+                );
+            }
         );
     }
 }

@@ -3,29 +3,30 @@
 namespace Thtg88\LaravelBaseClasses\Repositories\Concerns;
 
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\DB;
 
 trait WithSearch
 {
     /**
      * Return the model instances matching the given search query.
      *
-     * @param string $q The search query.
+     * @param string|null $q The search query.
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function search($q): Collection
+    public function search(?string $q): Collection
     {
         // If empty query or no search columns provided
+        // Return empty collection
         if ($q === null || $q === '') {
-            // Return empty collection
             return new Collection();
         }
 
         // If no search columns provided
+        // Return empty collection
         if (
             ! is_array(static::$search_columns) ||
             count(static::$search_columns) <= 0
         ) {
-            // Return empty collection
             return new Collection();
         }
 
@@ -51,7 +52,7 @@ trait WithSearch
      * @param string $q
      * @return \Illuminate\Database\Query\Builder
      */
-    protected function searchQuery($builder, $q)
+    protected function searchQuery($builder, string $q)
     {
         // Perform lowercase search to make it case insensitive
         $q = strtolower($q);
@@ -72,12 +73,8 @@ trait WithSearch
      * @param string $column
      * @return \Illuminate\Database\Query\Builder
      */
-    protected function searchQueryColumn($builder, $q, $column)
+    protected function searchQueryColumn($builder, string $q, string $column)
     {
-        if (! is_string($column)) {
-            return $builder;
-        }
-
         if ($column === 'id') {
             return $builder->orWhere($column, 'LIKE', '%'.$q.'%');
         }
@@ -96,7 +93,7 @@ trait WithSearch
         // Perform search on model's column
         if ($column_dot_count === 0) {
             return $builder->orWhere(
-                \DB::raw('LOWER('.$column.')'),
+                DB::raw('LOWER('.$column.')'),
                 'LIKE',
                 '%'.$q.'%'
             );
@@ -112,7 +109,7 @@ trait WithSearch
             $relationship,
             static function ($relationship_query) use ($q, $relationship_column) {
                 $relationship_query->where(
-                    \DB::raw('LOWER('.$relationship_column.')'),
+                    DB::raw('LOWER('.$relationship_column.')'),
                     'LIKE',
                     '%'.$q.'%'
                 );

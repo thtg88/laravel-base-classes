@@ -36,15 +36,13 @@ trait WithAllModels
 
         $result = $this->withDefaultOrderBy($result);
 
-        // Fetch result from DB
-        $temp_models = $result->get();
+        // Get model key name
+        $model_key = $this->model->getKeyName();
 
         // Build mapping id => model_name
         $models = [];
-        // Get model key name
-        $model_key = $this->model->getKeyName();
-        foreach ($temp_models as $idx => $model) {
-            $models[$model_key] = $model->{static::$model_name};
+        foreach ($result->get() as $idx => $model) {
+            $models[$model->$model_key] = $model->{static::$model_name};
         }
 
         return $models;

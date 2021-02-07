@@ -2,8 +2,9 @@
 
 namespace Thtg88\LaravelBaseClasses\Repositories\Concerns;
 
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 use Thtg88\LaravelBaseClasses\Models\JournalEntry;
-use DB;
 
 trait WithCreate
 {
@@ -13,25 +14,22 @@ trait WithCreate
      * @param array $data
      * @return \Illuminate\Database\Eloquent\Model
      */
-    public function create(array $data)
+    public function create(array $data): Model
     {
         // Create model
         $model = $this->model->create($data);
 
-        if (config('app.journal_mode') === true) {
-            // Create journal entry only if not creating journal entry, lol (infinite recursion)
-            $journal_entry_classname = JournalEntry::class;
-
-            if (
-                $model !== null &&
-                $model instanceof $journal_entry_classname === false
-            ) {
-                app('JournalEntryHelper')->createJournalEntry(
-                    'create',
-                    $model,
-                    $data
-                );
-            }
+        // Create journal entry only if not creating journal entry, lol (infinite recursion)
+        if (
+            config('base-classes.journal_mode') === true &&
+            $model !== null &&
+            $model instanceof JournalEntry === false
+        ) {
+            app('JournalEntryHelper')->createJournalEntry(
+                'create',
+                $model,
+                $data
+            );
         }
 
         // Get model key name
@@ -70,7 +68,7 @@ trait WithCreate
         // to avoid hitting issues on certain DBs
         $chunked_data = array_chunk(
             $data,
-            config('app.create_bulk_chunk_size'),
+            config('base-classes.create_bulk_chunk_size'),
             true
         );
 
@@ -83,7 +81,7 @@ trait WithCreate
             }
         }
 
-        if (config('app.journal_mode') === true) {
+        if (config('base-classes.journal_mode') === true) {
             app('JournalEntryHelper')->createJournalEntry(
                 'create-bulk',
                 null,

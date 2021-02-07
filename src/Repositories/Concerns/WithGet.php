@@ -16,14 +16,10 @@ trait WithGet
     public function getByIds(array $ids): Collection
     {
         // Filter out empty and non-numeric ids
-        $ids = array_filter(
-            $ids,
-            static function ($id) {
-                return is_numeric($id) && ! empty($id);
-            }
-        );
-
         // If no ids, return empty set
+        $ids = array_filter($ids, static function ($id) {
+            return is_numeric($id) && ! empty($id);
+        });
         if (empty($ids)) {
             return new Collection();
         }
@@ -110,12 +106,15 @@ trait WithGet
      */
     public function latest($limit): Collection
     {
+        // Assume limit as numeric and > 0
+        if (empty($limit) || ! is_numeric($limit) || $limit <= 0) {
+            return new Collection();
+        }
+
         $result = $this->model;
 
         $result = $this->withOptionalTrashed($result);
 
-        return $result->latest()
-            ->take($limit)
-            ->get();
+        return $result->latest()->take($limit)->get();
     }
 }
