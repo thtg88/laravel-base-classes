@@ -14,21 +14,22 @@ trait WithPagination
      */
     public function getMapFilterValues(IndexRequestInterface $request): array
     {
-        $filters = $this->getFilterValues($request);
-
         return array_reduce(
-            $filters,
-            static function ($result, $filter) {
+            $this->getFilterValues($request),
+            static function ($result, $filter): array {
                 $key = $filter['name'];
+
                 $data = [
                     'operator' => $filter['operator'],
                     'value' => $filter['value'],
                 ];
+
                 if (array_key_exists('relationship-field', $filter)) {
                     $key .= '.'.$filter['relationship-field'];
 
                     $data['relationship-field'] = $filter['relationship-field'];
                 }
+
                 if (array_key_exists('target_type', $filter)) {
                     $key .= '.'.$filter['target_type'];
 
@@ -50,9 +51,7 @@ trait WithPagination
      */
     public function getDefaultFilterValues(): array
     {
-        return [
-            //
-        ];
+        return [];
     }
 
     /**
@@ -68,6 +67,18 @@ trait WithPagination
         if (! is_array($request->filters)) {
             return $filters;
         }
+
+        // Filter out invalid filters
+        $request_filters = array_filter(
+            $request->filters,
+            static function ($filter): bool {
+                return array_key_exists('name', $filter) &&
+                    array_key_exists('operator', $filter) &&
+                    array_key_exists('value', $filter) &&
+                    is_string($filter['name']) &&
+                    is_string($filter['operator']);
+            }
+        );
 
         // No need to check for other constraints
         // as checked in PaginateRequest
@@ -126,7 +137,7 @@ trait WithPagination
      * @param \Thtg88\LaravelBaseClasses\Http\Requests\Contracts\IndexRequestInterface $request
      * @return int|null
      */
-    public function getPageSize(IndexRequestInterface $request): int
+    public function getPageSize(IndexRequestInterface $request): ?int
     {
         if (
             empty($request->page_size) ||

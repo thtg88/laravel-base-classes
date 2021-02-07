@@ -2,6 +2,10 @@
 
 namespace Thtg88\LaravelBaseClasses\Services;
 
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Str;
 use Thtg88\LaravelBaseClasses\Http\Requests\Contracts\DestroyRequestInterface;
 use Thtg88\LaravelBaseClasses\Http\Requests\Contracts\IndexRequestInterface;
 use Thtg88\LaravelBaseClasses\Http\Requests\Contracts\RestoreRequestInterface;
@@ -9,9 +13,7 @@ use Thtg88\LaravelBaseClasses\Http\Requests\Contracts\SearchRequestInterface;
 use Thtg88\LaravelBaseClasses\Http\Requests\Contracts\StoreRequestInterface;
 use Thtg88\LaravelBaseClasses\Http\Requests\Contracts\UpdateRequestInterface;
 use Thtg88\LaravelBaseClasses\Repositories\Repository;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Support\Str;
+use Thtg88\LaravelBaseClasses\Repositories\RepositoryInterface;
 
 class ResourceService implements ResourceServiceInterface
 {
@@ -22,16 +24,16 @@ class ResourceService implements ResourceServiceInterface
      *
      * @var \App\Repositories\RepositoryInterface
      */
-    protected $repository;
+    protected RepositoryInterface $repository;
 
     /**
      * Deletes a model instance from a given id.
      *
      * @param \Thtg88\LaravelBaseClasses\Http\Requests\Contracts\DestroyRequestInterface $request
      * @param int $id The id of the model.
-     * @return \Illuminate\Database\Eloquent\Model
+     * @return \Illuminate\Database\Eloquent\Model|null
      */
-    public function destroy(DestroyRequestInterface $request, $id)
+    public function destroy(DestroyRequestInterface $request, int $id): ?Model
     {
         return $this->repository->destroy($id);
     }
@@ -145,9 +147,9 @@ class ResourceService implements ResourceServiceInterface
      *
      * @param \Thtg88\LaravelBaseClasses\Http\Requests\Contracts\RestoreRequestInterface $request
      * @param int $id The id of the model
-     * @return \Illuminate\Database\Eloquent\Model
+     * @return \Illuminate\Database\Eloquent\Model|null
      */
-    public function restore(RestoreRequestInterface $request, $id)
+    public function restore(RestoreRequestInterface $request, int $id): ?Model
     {
         return $this->repository->restore($id);
     }
@@ -170,9 +172,9 @@ class ResourceService implements ResourceServiceInterface
      * Returns a model from a given id.
      *
      * @param int $id The id of the instance.
-     * @return \Illuminate\Database\Eloquent\Model
+     * @return \Illuminate\Database\Eloquent\Model|null
      */
-    public function show($id)
+    public function show(int $id): ?Model
     {
         return $this->repository->find($id);
     }
@@ -181,9 +183,9 @@ class ResourceService implements ResourceServiceInterface
      * Create a new model instance in storage from the given request.
      *
      * @param \Thtg88\LaravelBaseClasses\Http\Requests\Contracts\StoreRequestInterface $request
-     * @return \Illuminate\Database\Eloquent\Model
+     * @return \Illuminate\Database\Eloquent\Model|null
      */
-    public function store(StoreRequestInterface $request)
+    public function store(StoreRequestInterface $request): ?Model
     {
         // Get request data
         $data = $request->validated();
@@ -196,9 +198,9 @@ class ResourceService implements ResourceServiceInterface
      *
      * @param \Thtg88\LaravelBaseClasses\Http\Requests\Contracts\UpdateRequestInterface $request
      * @param int $id The id of the model
-     * @return \Illuminate\Database\Eloquent\Model
+     * @return \Illuminate\Database\Eloquent\Model|null
      */
-    public function update(UpdateRequestInterface $request, $id)
+    public function update(UpdateRequestInterface $request, int $id): ?Model
     {
         // Get request data
         $data = $request->validated();
