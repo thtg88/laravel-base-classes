@@ -18,7 +18,7 @@ abstract class Policy
      */
     public function viewAny(User $user): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -30,7 +30,7 @@ abstract class Policy
      */
     public function view(User $user, Model $model): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -41,7 +41,7 @@ abstract class Policy
      */
     public function create(User $user): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -52,7 +52,7 @@ abstract class Policy
      */
     public function search(User $user): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -64,7 +64,7 @@ abstract class Policy
      */
     public function update(User $user, Model $model): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -76,7 +76,7 @@ abstract class Policy
      */
     public function delete(User $user, Model $model): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -88,7 +88,7 @@ abstract class Policy
      */
     public function restore(User $user, Model $model): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -100,6 +100,6 @@ abstract class Policy
      */
     public function forceDelete(User $user, Model $model): bool
     {
-        return true;
+        return false;
     }
 }
