@@ -25,7 +25,8 @@
     },
     "autoload": {
         "psr-4": {
-            "Thtg88\\LaravelBaseClasses\\": "src/"
+            "Thtg88\\LaravelBaseClasses\\": "src/",
+            "Thtg88\\LaravelBaseClasses\\Database\\Factories\\": "database/factories/"
         }
     },
     "autoload-dev": {
