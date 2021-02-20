@@ -30,7 +30,7 @@ class FindTest extends TestCase
     {
         $expected = TestModel::factory()->softDeleted()->create();
 
-        $actual = $this->repository->find($expected);
+        $actual = $this->repository->find($expected->id);
 
         $this->assertNull($actual);
     }
