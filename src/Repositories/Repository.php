@@ -97,6 +97,16 @@ abstract class Repository implements RepositoryInterface
     }
 
     /**
+     * Return the repository model name.
+     *
+     * @return string
+     */
+    public function getModelName(): string
+    {
+        return static::$model_name;
+    }
+
+    /**
      * Return the repository model table.
      *
      * @return string
