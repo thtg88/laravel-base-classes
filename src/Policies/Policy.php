@@ -25,7 +25,7 @@ abstract class Policy
      * Determine whether the user can view the model.
      *
      * @param \Thtg88\LaravelBaseClasses\Models\User $user
-     * @param \Illuminate\Eloquent\Database\Model $model
+     * @param \Illuminate\Database\Eloquent\Model $model
      * @return bool
      */
     public function view(User $user, Model $model): bool
@@ -59,7 +59,7 @@ abstract class Policy
      * Determine whether the user can update the model.
      *
      * @param \Thtg88\LaravelBaseClasses\Models\User $user
-     * @param \Illuminate\Eloquent\Database\Model $model
+     * @param \Illuminate\Database\Eloquent\Model $model
      * @return bool
      */
     public function update(User $user, Model $model): bool
@@ -71,7 +71,7 @@ abstract class Policy
      * Determine whether the user can delete the model.
      *
      * @param \Thtg88\LaravelBaseClasses\Models\User $user
-     * @param \Illuminate\Eloquent\Database\Model $model
+     * @param \Illuminate\Database\Eloquent\Model $model
      * @return bool
      */
     public function delete(User $user, Model $model): bool
@@ -83,7 +83,7 @@ abstract class Policy
      * Determine whether the user can restore the model.
      *
      * @param \Thtg88\LaravelBaseClasses\Models\User $user
-     * @param \Illuminate\Eloquent\Database\Model $model
+     * @param \Illuminate\Database\Eloquent\Model $model
      * @return bool
      */
     public function restore(User $user, Model $model): bool
@@ -95,7 +95,7 @@ abstract class Policy
      * Determine whether the user can permanently delete the model.
      *
      * @param \Thtg88\LaravelBaseClasses\Models\User $user
-     * @param \Illuminate\Eloquent\Database\Model $model
+     * @param \Illuminate\Database\Eloquent\Model $model
      * @return bool
      */
     public function forceDelete(User $user, Model $model): bool

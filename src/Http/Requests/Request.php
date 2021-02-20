@@ -10,7 +10,7 @@ class Request extends FormRequest
     /**
      * The repository implementation.
      *
-     * @var \App\Repositories\Repository
+     * @var \Thtg88\LaravelBaseClasses\Repositories\Repository
      */
     protected $repository;
 
@@ -95,7 +95,7 @@ class Request extends FormRequest
     protected function findResource($with_trashed = false): ?Model
     {
         // Get id from route
-        $resource_id = $this->route('id');
+        $resource_id = (int) $this->route('id');
 
         // Find trashed resource
         if ($with_trashed === true) {

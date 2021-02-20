@@ -31,8 +31,7 @@ trait WithArchive
     public function unarchive(
         UnarchiveRequestInterface $request,
         int $id
-    ): ?Model
-    {
+    ): ?Model {
         return $this->repository->update($id, ['archived_at' => null]);
     }
 }

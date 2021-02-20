@@ -1,6 +1,6 @@
 <?php
 
-namespace Thtg88\LaravelBaseClasses\Http\Controllers;
+namespace Thtg88\LaravelBaseClasses\Http\Controllers\Web;
 
 use Closure;
 use Illuminate\Container\Container;
@@ -33,7 +33,7 @@ class ResourceController extends BaseResourceController
      *
      * @param \Thtg88\LaravelBaseClasses\Http\Requests\Contracts\DestroyRequestInterface $request
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(DestroyRequestInterface $request, $id)
     {
@@ -48,7 +48,7 @@ class ResourceController extends BaseResourceController
      * Store a newly created resource in storage.
      *
      * @param \Thtg88\LaravelBaseClasses\Http\Requests\Contracts\StoreRequestInterface $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(StoreRequestInterface $request)
     {
@@ -64,7 +64,7 @@ class ResourceController extends BaseResourceController
      *
      * @param \Thtg88\LaravelBaseClasses\Http\Requests\Contracts\UpdateRequestInterface $request
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(UpdateRequestInterface $request, $id)
     {
@@ -79,7 +79,7 @@ class ResourceController extends BaseResourceController
      * Download a listing of all the resources in CSV format.
      *
      * @param \Thtg88\LaravelBaseClasses\Http\Requests\DownloadCsvRequest $request
-     * @return \Illuminate\Http\Response
+     * @return \Symfony\Component\HttpFoundation\StreamedResponse
      */
     public function downloadCsv(DownloadCsvRequest $request)
     {

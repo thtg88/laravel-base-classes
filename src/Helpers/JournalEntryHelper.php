@@ -15,7 +15,7 @@ class JournalEntryHelper
     /**
      * The journal entry repo implementation.
      *
-     * @var \App\Repositories\JournalEntryRepository
+     * @var \Thtg88\LaravelBaseClasses\Repositories\JournalEntryRepository
      */
     protected $journal_entries;
 
@@ -34,7 +34,7 @@ class JournalEntryHelper
      * Create a new journal entry instance in storage.
      *
      * @param string $action The action performing while creating the entry.
-     * @param Illuminate\Database\Eloquent\Model|null $model The model the action is performed on.
+     * @param \Illuminate\Database\Eloquent\Model|null $model The model the action is performed on.
      * @param array $content The action content data.
      * @return \Thtg88\LaravelBaseClasses\Models\JournalEntry
      */

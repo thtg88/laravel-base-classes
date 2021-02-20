@@ -3,6 +3,7 @@
 namespace Thtg88\LaravelBaseClasses\Repositories\Concerns;
 
 use Illuminate\Database\Eloquent\Model;
+use Thtg88\LaravelBaseClasses\Helpers\JournalEntryHelper;
 use Thtg88\LaravelBaseClasses\Models\JournalEntry;
 
 trait WithDestroy
@@ -24,7 +25,7 @@ trait WithDestroy
         $model->delete();
 
         if (config('base-classes.journal_mode') === true) {
-            app('JournalEntryHelper')->createJournalEntry(
+            app(JournalEntryHelper::class)->createJournalEntry(
                 'delete',
                 $model
             );
@@ -53,7 +54,7 @@ trait WithDestroy
         $response = $this->model->whereIn('id', $ids)->delete();
 
         if (config('base-classes.journal_mode') === true) {
-            app('JournalEntryHelper')->createJournalEntry(
+            app(JournalEntryHelper::class)->createJournalEntry(
                 'delete-bulk',
                 null,
                 [
@@ -88,7 +89,7 @@ trait WithDestroy
             config('base-classes.journal_mode') === true &&
             ! ($model instanceof JournalEntry)
         ) {
-            app('JournalEntryHelper')->createJournalEntry(
+            app(JournalEntryHelper::class)->createJournalEntry(
                 'restore',
                 $model,
                 []
