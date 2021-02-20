@@ -12,7 +12,7 @@ class FindByUuidTest extends TestCase
      * @test
      * @covers \Thtg88\LaravelBaseClasses\Repositories\Concerns\WithFindByUuid::findByUuid
      */
-    public function find_returns_a_model(): void
+    public function find_by_uuid_returns_a_model(): void
     {
         $expected = TestModel::factory()->create();
 
@@ -27,7 +27,7 @@ class FindByUuidTest extends TestCase
      * @test
      * @covers \Thtg88\LaravelBaseClasses\Repositories\Concerns\WithFindByUuid::findByUuid
      */
-    public function find_does_not_return_soft_deleted_model(): void
+    public function find_by_uuid_does_not_return_soft_deleted_model(): void
     {
         $expected = TestModel::factory()->softDeleted()->create();
 
@@ -40,7 +40,7 @@ class FindByUuidTest extends TestCase
      * @test
      * @covers \Thtg88\LaravelBaseClasses\Repositories\Concerns\WithFindByUuid::findByUuid
      */
-    public function find_does_not_return_anything_if_no_models(): void
+    public function find_by_uuid_does_not_return_anything_if_no_models(): void
     {
         $actual = $this->repository->findByUuid((string) Str::uuid());
 
@@ -51,7 +51,7 @@ class FindByUuidTest extends TestCase
      * @test
      * @covers \Thtg88\LaravelBaseClasses\Repositories\Concerns\WithFindByUuid::findByUuid
      */
-    public function find_does_not_return_anything_if_model_name_zero(): void
+    public function find_by_uuid_does_not_return_anything_if_model_name_zero(): void
     {
         $actual = $this->repository->findByUuid(0);
 
@@ -62,7 +62,7 @@ class FindByUuidTest extends TestCase
      * @test
      * @covers \Thtg88\LaravelBaseClasses\Repositories\Concerns\WithFindByUuid::findByUuid
      */
-    public function find_does_not_return_anything_if_model_name_empty_string(): void
+    public function find_by_uuid_does_not_return_anything_if_model_name_empty_string(): void
     {
         $actual = $this->repository->findByUuid('');
 
