@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/) (or at least it tries to).
 
+## [0.3.0] - 2021-02-20
+### Changed
+- Pin PHP v8 in composer.json and CI and dependencies updates
+- Refactor base validator usage
+## Fixed
+- Custom validator resolver
+- Psalm stan fixes
+
 ## [0.2.0] - 2021-02-07
 ### Added
 - Basic auth layer
