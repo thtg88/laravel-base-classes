@@ -2,6 +2,7 @@
 
 namespace Thtg88\LaravelBaseClasses\Tests\TestClasses\Factories;
 
+use Illuminate\Support\Str;
 use Thtg88\LaravelBaseClasses\Database\Factories\Factory;
 use Thtg88\LaravelBaseClasses\Tests\TestClasses\Models\TestModel;
 
@@ -21,6 +22,6 @@ class TestModelFactory extends Factory
      */
     public function definition()
     {
-        return [];
+        return ['uuid' => (string) Str::uuid()];
     }
 }
