@@ -40,12 +40,9 @@ trait WithAllModels
         $model_key = $this->model->getKeyName();
 
         // Build mapping id => model_name
-        $models = [];
-        foreach ($result->get() as $idx => $model) {
-            $models[$model->$model_key] = $model->{static::$model_name};
-        }
-
-        return $models;
+        return $result->get()
+            ->pluck(static::$model_name, $model_key)
+            ->toArray();
     }
 
     /**
