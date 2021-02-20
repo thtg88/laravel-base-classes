@@ -13,8 +13,8 @@ jobs:
 
     - uses: "ramsey/composer-install@v1"
 
-    # - name: Run linting
-    #   run: composer run-script check-style
+    - name: Run linting
+      run: composer run-script check-style
 
     - name: Run static analysis
       run: composer run-script stan

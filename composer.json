@@ -33,6 +33,9 @@
         }
     },
     "extra": {
+        "hooks": {
+            "pre-commit": "vendor/bin/php-cs-fixer fix --using-cache=no --diff --dry-run"
+        },
         "laravel": {
             "providers": [
                 "Thtg88\\LaravelBaseClasses\\LaravelBaseClassesServiceProvider"
@@ -41,6 +44,7 @@
     },
     "scripts": {
         "ci": [
+            "@check-style",
             "@stan",
             "@test --stop-on-failure"
         ],
