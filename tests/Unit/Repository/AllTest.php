@@ -1,13 +1,13 @@
 <?php
 
-namespace Tests\Unit;
+namespace Tests\Unit\Repository;
 
 use Illuminate\Database\Eloquent\Collection;
 use Thtg88\LaravelBaseClasses\Tests\TestCase;
 use Thtg88\LaravelBaseClasses\Tests\TestClasses\Models\TestModel;
 use Thtg88\LaravelBaseClasses\Tests\TestClasses\Repositories\TestModelRepository;
 
-class RepositoryTest extends TestCase
+class AllTest extends TestCase
 {
     /** @var \Thtg88\LaravelBaseClasses\Repositories\TestModelRepository */
     protected $repository;
@@ -19,7 +19,10 @@ class RepositoryTest extends TestCase
         $this->repository = app()->make(TestModelRepository::class);
     }
 
-    /** @test */
+    /**
+     * @test
+     * @covers \Thtg88\LaravelBaseClasses\Repositories\Repository::all
+     */
     public function all_returns_all_models(): void
     {
         $expected = TestModel::factory()->count(3)->create();
@@ -36,11 +39,27 @@ class RepositoryTest extends TestCase
         }
     }
 
-    /** @test */
+    /**
+     * @test
+     * @covers \Thtg88\LaravelBaseClasses\Repositories\Repository::all
+     */
     public function all_does_not_return_soft_deleted_models(): void
     {
         TestModel::factory()->softDeleted()->count(3)->create();
 
+        $actual = $this->repository->all();
+
+        $this->assertNotNull($actual);
+        $this->assertInstanceOf(Collection::class, $actual);
+        $this->assertEquals(0, $actual->count());
+    }
+
+    /**
+     * @test
+     * @covers \Thtg88\LaravelBaseClasses\Repositories\Repository::all
+     */
+    public function all_does_not_return_anything_if_no_models(): void
+    {
         $actual = $this->repository->all();
 
         $this->assertNotNull($actual);
