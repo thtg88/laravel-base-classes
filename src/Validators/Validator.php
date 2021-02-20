@@ -2,9 +2,9 @@
 
 namespace Thtg88\LaravelBaseClasses\Validators;
 
-use Illuminate\Validation\Validator;
+use Illuminate\Validation\Validator as BaseValidator;
 
-class CustomValidator extends Validator
+class Validator extends BaseValidator
 {
     use Concerns\WithUniqueCaseInsensitiveValidation;
 }
