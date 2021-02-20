@@ -2,11 +2,14 @@
 
 namespace Thtg88\LaravelBaseClasses\Tests\TestClasses\Repositories;
 
+use Thtg88\LaravelBaseClasses\Repositories\Concerns\WithFindByUuid;
 use Thtg88\LaravelBaseClasses\Repositories\Repository;
 use Thtg88\LaravelBaseClasses\Tests\TestClasses\Models\TestModel;
 
 class TestModelRepository extends Repository
 {
+    use WithFindByUuid;
+
     /** @var string */
     protected static $model_name = 'uuid';
 
