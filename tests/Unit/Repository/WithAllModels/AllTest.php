@@ -1,24 +1,13 @@
 <?php
 
-namespace Tests\Unit\Repository;
+namespace Tests\Unit\Repository\WithAllModels;
 
 use Illuminate\Database\Eloquent\Collection;
-use Thtg88\LaravelBaseClasses\Tests\TestCase;
+use Tests\Unit\Repository\TestCase;
 use Thtg88\LaravelBaseClasses\Tests\TestClasses\Models\TestModel;
-use Thtg88\LaravelBaseClasses\Tests\TestClasses\Repositories\TestModelRepository;
 
 class AllTest extends TestCase
 {
-    /** @var \Thtg88\LaravelBaseClasses\Repositories\TestModelRepository */
-    protected $repository;
-
-    public function setUp(): void
-    {
-        parent::setUp();
-
-        $this->repository = app()->make(TestModelRepository::class);
-    }
-
     /**
      * @test
      * @covers \Thtg88\LaravelBaseClasses\Repositories\Repository::all
