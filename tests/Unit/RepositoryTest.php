@@ -29,7 +29,7 @@ class RepositoryTest extends TestCase
         $this->assertNotNull($actual);
         $this->assertInstanceOf(Collection::class, $actual);
         $this->assertEquals($expected->count(), $actual->count());
-        foreach($expected as $expected_model) {
+        foreach ($expected as $expected_model) {
             $this->assertNotNull(
                 $actual->firstWhere('id', $expected_model->id)
             );
