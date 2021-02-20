@@ -5,7 +5,7 @@ namespace Thtg88\LaravelBaseClasses\Repositories;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
 
-class Repository implements RepositoryInterface
+abstract class Repository implements RepositoryInterface
 {
     use Concerns\WithAllModels;
     use Concerns\WithCreate;
@@ -94,6 +94,16 @@ class Repository implements RepositoryInterface
     public function getModel(): Model
     {
         return $this->model;
+    }
+
+    /**
+     * Return the repository model name.
+     *
+     * @return string
+     */
+    public function getModelName(): string
+    {
+        return static::$model_name;
     }
 
     /**
