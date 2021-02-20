@@ -22,7 +22,7 @@ class ResourceService implements ResourceServiceInterface
     /**
      * The repository implementation.
      *
-     * @var \App\Repositories\RepositoryInterface
+     * @var \Thtg88\LaravelBaseClasses\Repositories\RepositoryInterface
      */
     protected RepositoryInterface $repository;
 

@@ -4,6 +4,7 @@ namespace Thtg88\LaravelBaseClasses\Repositories\Concerns;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Thtg88\LaravelBaseClasses\Helpers\JournalEntryHelper;
 use Thtg88\LaravelBaseClasses\Models\JournalEntry;
 
 trait WithCreate
@@ -25,7 +26,7 @@ trait WithCreate
             $model !== null &&
             $model instanceof JournalEntry === false
         ) {
-            app('JournalEntryHelper')->createJournalEntry(
+            app(JournalEntryHelper::class)->createJournalEntry(
                 'create',
                 $model,
                 $data
@@ -82,7 +83,7 @@ trait WithCreate
         }
 
         if (config('base-classes.journal_mode') === true) {
-            app('JournalEntryHelper')->createJournalEntry(
+            app(JournalEntryHelper::class)->createJournalEntry(
                 'create-bulk',
                 null,
                 [

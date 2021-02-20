@@ -16,7 +16,7 @@ class ResourceController extends BaseResourceController
      *
      * @param \Thtg88\LaravelBaseClasses\Http\Requests\Contracts\DestroyRequestInterface $request
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(DestroyRequestInterface $request, $id)
     {
@@ -33,7 +33,7 @@ class ResourceController extends BaseResourceController
      * Display a listing of the resource.
      *
      * @param \Thtg88\LaravelBaseClasses\Http\Requests\Contracts\IndexRequestInterface $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index(IndexRequestInterface $request)
     {
@@ -48,7 +48,7 @@ class ResourceController extends BaseResourceController
      *
      * @param \Thtg88\LaravelBaseClasses\Http\Requests\Contracts\ShowRequestInterface $request
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function show(ShowRequestInterface $request, $id)
     {
@@ -68,7 +68,7 @@ class ResourceController extends BaseResourceController
      * Store a newly created resource in storage.
      *
      * @param \Thtg88\LaravelBaseClasses\Http\Requests\Contracts\StoreRequestInterface $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(StoreRequestInterface $request)
     {
@@ -86,7 +86,7 @@ class ResourceController extends BaseResourceController
      *
      * @param \Thtg88\LaravelBaseClasses\Http\Requests\Contracts\UpdateRequestInterface $request
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update(UpdateRequestInterface $request, $id)
     {

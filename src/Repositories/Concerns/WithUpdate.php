@@ -2,8 +2,9 @@
 
 namespace Thtg88\LaravelBaseClasses\Repositories\Concerns;
 
-use Thtg88\LaravelBaseClasses\Models\JournalEntry;
 use Illuminate\Database\Eloquent\Model;
+use Thtg88\LaravelBaseClasses\Helpers\JournalEntryHelper;
+use Thtg88\LaravelBaseClasses\Models\JournalEntry;
 
 trait WithUpdate
 {
@@ -38,7 +39,7 @@ trait WithUpdate
             config('base-classes.journal_mode') === true &&
             ! ($model instanceof JournalEntry)
         ) {
-            app('JournalEntryHelper')->createJournalEntry(
+            app(JournalEntryHelper::class)->createJournalEntry(
                 null,
                 $model,
                 $data

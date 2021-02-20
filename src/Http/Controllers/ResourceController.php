@@ -17,7 +17,7 @@ class ResourceController extends Controller
     /**
      * The service implementation.
      *
-     * @var \App\Http\Requests\Contracts\ResourceServiceInterface
+     * @var \Thtg88\LaravelBaseClasses\Services\ResourceServiceInterface
      */
     protected ResourceServiceInterface $service;
 
