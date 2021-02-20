@@ -3,7 +3,6 @@
 namespace Thtg88\LaravelBaseClasses;
 
 use Illuminate\Container\Container;
-use Illuminate\Support\Facades\Validator as ValidatorFacade;
 use Illuminate\Support\ServiceProvider;
 use Thtg88\LaravelBaseClasses\Helpers\JournalEntryHelper;
 use Thtg88\LaravelBaseClasses\Validators\Validator;
@@ -24,7 +23,7 @@ class LaravelBaseClassesServiceProvider extends ServiceProvider
         ], 'base-classes-config');
 
         // Register custom validator
-        ValidatorFacade::resolver(static function ($translator, $data, $rules, $messages) {
+        app('validator')->resolver(static function ($translator, $data, $rules, $messages) {
             return new Validator($translator, $data, $rules, $messages);
         });
     }
