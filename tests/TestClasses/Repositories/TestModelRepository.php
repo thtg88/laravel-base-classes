@@ -7,6 +7,18 @@ use Thtg88\LaravelBaseClasses\Tests\TestClasses\Models\TestModel;
 
 class TestModelRepository extends Repository
 {
+    /** @var string */
+    protected static $model_name = 'uuid';
+
+    /** @var array */
+    protected static $order_by_columns = ['id' => 'desc'];
+
+    /** @var string[] */
+    protected static $search_columns = [];
+
+    /** @var string[] */
+    protected static $filter_columns = [];
+
     /**
      * Create a new repository instance.
      *
