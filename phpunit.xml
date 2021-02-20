@@ -18,7 +18,7 @@
         </include>
     </coverage>
     <testsuites>
-        <testsuite name="mmCMS Test Suite">
+        <testsuite name="Laravel Base Classes Test Suite">
             <directory suffix=".php">./tests/Unit</directory>
         </testsuite>
     </testsuites>
