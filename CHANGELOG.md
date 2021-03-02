@@ -4,6 +4,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/) (or at least it tries to).
 
+## [0.7.0] - 2021-03-02
+### Added
+- Content column `array` cast to `JournalEntry`
+- `journal_entries` migration
+- Users factory
+- Users migration
+### Changed
+- Default model to `null` if N/A in `JournalEntryHelper::createJournalEntry`
+- Don't extend base model in `JournalEntry` model
+- Journal entry `content` column is now JSONb
+- Rename `target_table` of `journal_entries` to `target_type` to match Laravel convention
+### Removed
+- `json_encode` of `content` from `JournalEntryHelper` (now dealt by cast on model)
+
 ## [0.6.0] - 2021-03-02
 ### Removed
 - Registration of validator and journal entry helper in service provider
