@@ -20,6 +20,7 @@ class TestModel extends Model
     protected $fillables = [
         'end_date',
         'start_date',
+        'secret',
         'uuid',
     ];
 
@@ -35,6 +36,13 @@ class TestModel extends Model
         'start_date' => 'datetime',
         'updated_at' => 'datetime',
     ];
+
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array
+     */
+    protected $hidden = ['secret'];
 
     /**
      * Create a new factory instance for the model.
