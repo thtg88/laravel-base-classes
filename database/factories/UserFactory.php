@@ -2,8 +2,8 @@
 
 namespace Thtg88\LaravelBaseClasses\Database\Factories;
 
-use Thtg88\LaravelBaseClasses\Models\User;
 use Illuminate\Support\Str;
+use Thtg88\LaravelBaseClasses\Models\User;
 
 class UserFactory extends Factory
 {
@@ -24,10 +24,10 @@ class UserFactory extends Factory
         return [
             // 'first_name' => $this->faker->firstName,
             // 'last_name' => $this->faker->lastName,
-            'email' => $this->faker->unique()->safeEmail,
+            'email'             => $this->faker->unique()->safeEmail,
             'email_verified_at' => now()->toDateTimeString(),
-            'password' => 'password',
-            'remember_token' => Str::random(10),
+            'password'          => 'password',
+            'remember_token'    => Str::random(10),
         ];
     }
 

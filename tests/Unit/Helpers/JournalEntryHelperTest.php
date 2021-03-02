@@ -9,7 +9,6 @@ use Thtg88\LaravelBaseClasses\Models\JournalEntry;
 use Thtg88\LaravelBaseClasses\Models\User;
 use Thtg88\LaravelBaseClasses\Tests\TestCase;
 use Thtg88\LaravelBaseClasses\Tests\TestClasses\Models\TestModel;
-use Thtg88\LaravelBaseClasses\Tests\TestClasses\Repositories\TestModelRepository;
 
 class JournalEntryHelperTest extends TestCase
 {
@@ -20,7 +19,7 @@ class JournalEntryHelperTest extends TestCase
     {
         parent::setUp();
 
-        $this->loadMigrationsFrom(__DIR__ . '/../../../database/migrations');
+        $this->loadMigrationsFrom(__DIR__.'/../../../database/migrations');
 
         $this->artisan('migrate', [
             '--path' => [__DIR__.'/../../../database/migrations'],
