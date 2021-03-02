@@ -74,7 +74,7 @@ class JournalEntryHelper
             );
         }
 
-        $data['content'] = json_encode($content);
+        $data['content'] = $content;
 
         return $this->journal_entries->create($data);
     }

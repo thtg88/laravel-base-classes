@@ -32,6 +32,7 @@ class JournalEntry extends Model
      * @var array
      */
     protected $casts = [
+        'content'    => 'array',
         'created_at' => 'datetime',
         'target_id'  => 'integer',
         'updated_at' => 'datetime',
