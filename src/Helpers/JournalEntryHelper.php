@@ -54,7 +54,7 @@ class JournalEntryHelper
         // Build data array to save journal entry
         $data = [
             'target_id'    => $id,
-            'target_type' => $target_type,
+            'target_type'  => $target_type,
             'action'       => $action,
         ];
 
