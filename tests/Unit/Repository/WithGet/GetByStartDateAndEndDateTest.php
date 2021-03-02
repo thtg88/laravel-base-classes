@@ -14,7 +14,7 @@ class GetByStartDateAndEndDateTest extends TestCase
      * @test
      * @covers \Thtg88\LaravelBaseClasses\Repositories\Concerns\WithGet::getByStartDateAndEndDate
      */
-    public function date_filter_created_at_get_by_start_date_and_end_date_returns_specified_amount_of_models(): void
+    public function date_filter_created_at_get_by_start_date_and_end_date_returns_all_models(): void
     {
         $expected = TestModel::factory()->count(5)->create();
 
