@@ -150,6 +150,7 @@ abstract class Repository implements RepositoryInterface
      * Set the date filter columns in the current repository.
      *
      * @param array $date_filter_columns
+     *
      * @return self
      */
     public function setDateFilterColumns(array $date_filter_columns): self
@@ -160,7 +161,7 @@ abstract class Repository implements RepositoryInterface
     }
 
     /**
-     * Exclude a scope for the model in the current repository
+     * Exclude a scope for the model in the current repository.
      *
      * @return self
      */
@@ -168,14 +169,14 @@ abstract class Repository implements RepositoryInterface
     {
         $this->model = $this->model->withGlobalScope(
             $scope_classname,
-            new $scope_classname
+            new $scope_classname()
         );
 
         return $this;
     }
 
     /**
-     * Exclude a scope for the model in the current repository
+     * Exclude a scope for the model in the current repository.
      *
      * @return self
      */
@@ -215,12 +216,13 @@ abstract class Repository implements RepositoryInterface
      * from a given existing query builder.
      *
      * @param \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model $builder
+     *
      * @return \Illuminate\Database\Query\Builder
      */
     protected function withDefaultOrderBy($builder)
     {
         if (
-            ! is_array(static::$order_by_columns) ||
+            !is_array(static::$order_by_columns) ||
             count(static::$order_by_columns) === 0
         ) {
             return $builder;
@@ -238,6 +240,7 @@ abstract class Repository implements RepositoryInterface
      * in the given builder.
      *
      * @param \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model $builder
+     *
      * @return \Illuminate\Database\Query\Builder
      */
     protected function withOptionalTrashed($builder)

@@ -11,7 +11,8 @@ trait WithArchive
      * Archive a model instance with given request, and id.
      *
      * @param \Thtg88\LaravelBaseClasses\Http\Requests\Contracts\ArchiveRequestInterface $request
-     * @param int $id The id of the model
+     * @param int                                                                        $id      The id of the model
+     *
      * @return \Illuminate\Database\Eloquent\Model|null
      */
     public function archive(ArchiveRequestInterface $request, int $id): ?Model
@@ -25,7 +26,8 @@ trait WithArchive
      * Remove a model instance from archive, from a given request, and id.
      *
      * @param \Thtg88\LaravelBaseClasses\Http\Requests\Contracts\UnarchiveRequestInterface $request
-     * @param int $id The id of the model
+     * @param int                                                                          $id      The id of the model
+     *
      * @return \Illuminate\Database\Eloquent\Model|null
      */
     public function unarchive(

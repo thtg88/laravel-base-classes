@@ -37,8 +37,9 @@ class DownloadCsvHelper
      * Create a new helper instance.
      *
      * @param \Thtg88\LaravelBaseClasses\Services\ResourceServiceInterface $service
-     * @param \Closure $header_row_callback The callback to call for each row in order to get a map of data for each row.
-     * @param \Closure $row_callback The callback to call for each row in order to get a map of data for each row.
+     * @param \Closure                                                     $header_row_callback The callback to call for each row in order to get a map of data for each row.
+     * @param \Closure                                                     $row_callback        The callback to call for each row in order to get a map of data for each row.
+     *
      * @return void
      */
     public function __construct(
@@ -57,6 +58,7 @@ class DownloadCsvHelper
      * from the existing service.
      *
      * @param \Illuminate\Http\Request $request
+     *
      * @return \Closure
      */
     public function getCallback(Request $request): Closure
@@ -114,7 +116,7 @@ class DownloadCsvHelper
 
             // Page size fall back to configs
             if (
-                ! array_key_exists('page_size', $filter_data) ||
+                !array_key_exists('page_size', $filter_data) ||
                 $filter_data['page_size'] === null
             ) {
                 $filter_data['page_size'] = config(
@@ -132,9 +134,9 @@ class DownloadCsvHelper
                 $repository = $repository->withTrashed();
 
                 $wheres[] = [
-                    'field' => 'deleted_at',
+                    'field'    => 'deleted_at',
                     'operator' => '<>',
-                    'value' => null,
+                    'value'    => null,
                 ];
             }
 
@@ -168,7 +170,7 @@ class DownloadCsvHelper
                 // to the output yet
                 if (
                     count($paginated_resources->items()) > 0 &&
-                    ! isset($headers)
+                    !isset($headers)
                 ) {
                     $headers = call_user_func(
                         $this->header_row_callback,

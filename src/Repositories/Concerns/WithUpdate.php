@@ -11,8 +11,9 @@ trait WithUpdate
     /**
      * Updates a model instance with given data, from a given id.
      *
-     * @param int $id The id of the model
+     * @param int   $id   The id of the model
      * @param array $data
+     *
      * @return \Illuminate\Database\Eloquent\Model
      */
     public function update(int $id, array $data): ?Model
@@ -37,7 +38,7 @@ trait WithUpdate
         // Create journal entry only if not creating journal entry i.e. infinite recursion
         if (
             config('base-classes.journal_mode') === true &&
-            ! ($model instanceof JournalEntry)
+            !($model instanceof JournalEntry)
         ) {
             app(JournalEntryHelper::class)->createJournalEntry(
                 null,
@@ -55,9 +56,10 @@ trait WithUpdate
     /**
      * Filter out data that would not change the state of the model.
      *
-     * @param array $data The data to set.
-     * @param \Illuminate\Database\Eloquent\Model $model The model to update.
-     * @param array $exclude A set of columns to exclude from the prune e.g. if the update is meant to update associations as well.
+     * @param array                               $data    The data to set.
+     * @param \Illuminate\Database\Eloquent\Model $model   The model to update.
+     * @param array                               $exclude A set of columns to exclude from the prune e.g. if the update is meant to update associations as well.
+     *
      * @return array
      */
     protected function pruneData(
@@ -86,7 +88,7 @@ trait WithUpdate
 
         foreach ($data as $column => $value) {
             // If there is no such column in the original model - discard
-            if (! array_key_exists($column, $model_values)) {
+            if (!array_key_exists($column, $model_values)) {
                 unset($data[$column]);
                 continue;
             }

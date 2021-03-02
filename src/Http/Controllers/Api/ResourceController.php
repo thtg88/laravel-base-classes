@@ -15,7 +15,8 @@ class ResourceController extends BaseResourceController
      * Remove the specified resource from storage.
      *
      * @param \Thtg88\LaravelBaseClasses\Http\Requests\Contracts\DestroyRequestInterface $request
-     * @param int $id
+     * @param int                                                                        $id
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(DestroyRequestInterface $request, $id)
@@ -24,7 +25,7 @@ class ResourceController extends BaseResourceController
         $resource = $this->service->destroy($request, $id);
 
         return response()->json([
-            'success' => true,
+            'success'  => true,
             'resource' => $resource,
         ]);
     }
@@ -33,6 +34,7 @@ class ResourceController extends BaseResourceController
      * Display a listing of the resource.
      *
      * @param \Thtg88\LaravelBaseClasses\Http\Requests\Contracts\IndexRequestInterface $request
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function index(IndexRequestInterface $request)
@@ -47,7 +49,8 @@ class ResourceController extends BaseResourceController
      * Display the specified resource.
      *
      * @param \Thtg88\LaravelBaseClasses\Http\Requests\Contracts\ShowRequestInterface $request
-     * @param int $id
+     * @param int                                                                     $id
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function show(ShowRequestInterface $request, $id)
@@ -68,6 +71,7 @@ class ResourceController extends BaseResourceController
      * Store a newly created resource in storage.
      *
      * @param \Thtg88\LaravelBaseClasses\Http\Requests\Contracts\StoreRequestInterface $request
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function store(StoreRequestInterface $request)
@@ -76,7 +80,7 @@ class ResourceController extends BaseResourceController
         $resource = $this->service->store($request);
 
         return response()->json([
-            'success' => true,
+            'success'  => true,
             'resource' => $resource,
         ]);
     }
@@ -85,7 +89,8 @@ class ResourceController extends BaseResourceController
      * Update the specified resource in storage.
      *
      * @param \Thtg88\LaravelBaseClasses\Http\Requests\Contracts\UpdateRequestInterface $request
-     * @param int $id
+     * @param int                                                                       $id
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function update(UpdateRequestInterface $request, $id)

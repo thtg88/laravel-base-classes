@@ -23,7 +23,7 @@ class TestModelFactory extends Factory
     public function definition()
     {
         return [
-            'end_date' => $this->faker->dateTime(),
+            'end_date'   => $this->faker->dateTime(),
             'start_date' => function (array $data) {
                 return $this->faker->dateTime($data['end_date']);
             },

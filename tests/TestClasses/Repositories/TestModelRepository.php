@@ -26,6 +26,7 @@ class TestModelRepository extends Repository
      * Create a new repository instance.
      *
      * @param \Thtg88\LaravelBaseClasses\Tests\TestClasses\Models\TestModel $model
+     *
      * @return void
      */
     public function __construct(TestModel $model)

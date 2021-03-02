@@ -15,7 +15,6 @@ return [
 
     'create_bulk_chunk_size' => env('LARAVEL_BASE_CREATE_BULK_CHUNK_SIZE', 100),
 
-
     /*
     |--------------------------------------------------------------------------
     | Journal mode
@@ -42,7 +41,7 @@ return [
 
     'pagination' => [
         'columns' => [
-            env('LARAVEL_BASE_PAGINATION_COLUMNS', '*')
+            env('LARAVEL_BASE_PAGINATION_COLUMNS', '*'),
         ],
 
         'page_name' => env('LARAVEL_BASE_PAGINATION_PAGE_NAME', 'page'),
