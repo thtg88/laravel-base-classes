@@ -17,12 +17,12 @@ class CreateJournalEntriesTable extends Migration
             $table->id('id');
             $table->unsignedBigInteger('user_id')->nullable()->index();
             $table->unsignedBigInteger('target_id')->nullable();
-            $table->string('target_table')->nullable();
+            $table->string('target_type')->nullable();
             $table->string('action')->nullable()->index();
             $table->text('content')->nullable();
             $table->timestamps();
 
-            $table->index(['target_id', 'target_table']);
+            $table->index(['target_id', 'target_type']);
         });
     }
 

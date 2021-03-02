@@ -21,7 +21,7 @@ class JournalEntry extends Model
         'content',
         'created_at',
         'target_id',
-        'target_table',
+        'target_type',
         'updated_at',
         'user_id',
     ];

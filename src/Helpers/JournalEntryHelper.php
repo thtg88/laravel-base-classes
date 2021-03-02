@@ -45,7 +45,7 @@ class JournalEntryHelper
         ?Model $model = null,
         ?array $content = null
     ): JournalEntry {
-        $target_table = $this->getTargetTable($model);
+        $target_type = $this->getTargetType($model);
         $id = $model->id ?? null;
 
         // Get current authenticated user
@@ -54,7 +54,7 @@ class JournalEntryHelper
         // Build data array to save journal entry
         $data = [
             'target_id'    => $id,
-            'target_table' => $target_table,
+            'target_type' => $target_type,
             'action'       => $action,
         ];
 
@@ -79,7 +79,7 @@ class JournalEntryHelper
         return $this->journal_entries->create($data);
     }
 
-    private function getTargetTable(?Model $model): ?string
+    private function getTargetType(?Model $model): ?string
     {
         if ($model === null) {
             return null;
@@ -92,12 +92,12 @@ class JournalEntryHelper
         $morph_map = Relation::morphMap();
 
         // Get target table for model
-        $target_table = array_search($class_name, $morph_map);
+        $target_type = array_search($class_name, $morph_map);
 
-        if ($target_table === false) {
+        if ($target_type === false) {
             return null;
         }
 
-        return $target_table;
+        return $target_type;
     }
 }
