@@ -23,9 +23,9 @@ class LaravelBaseClassesServiceProvider extends ServiceProvider
         ], 'base-classes-config');
 
         // Register custom validator
-        app('validator')->resolver(static function ($translator, $data, $rules, $messages) {
-            return new Validator($translator, $data, $rules, $messages);
-        });
+        // app('validator')->resolver(static function ($translator, $data, $rules, $messages) {
+        //     return new Validator($translator, $data, $rules, $messages);
+        // });
     }
 
     /**
@@ -41,8 +41,8 @@ class LaravelBaseClassesServiceProvider extends ServiceProvider
         );
 
         // Register journal entry helper singleton
-        $this->app->singleton(JournalEntryHelper::class, static function ($app) {
-            return $app->make(JournalEntryHelper::class);
-        });
+        // $this->app->singleton(JournalEntryHelper::class, static function ($app) {
+        //     return $app->make(JournalEntryHelper::class);
+        // });
     }
 }
