@@ -17,7 +17,24 @@ class TestModel extends Model
      *
      * @var array
      */
-    protected $fillables = ['uuid'];
+    protected $fillables = [
+        'end_date',
+        'start_date',
+        'uuid',
+    ];
+
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'created_at' => 'datetime',
+        'deleted_at' => 'datetime',
+        'end_date' => 'datetime',
+        'start_date' => 'datetime',
+        'updated_at' => 'datetime',
+    ];
 
     /**
      * Create a new factory instance for the model.

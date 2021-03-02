@@ -15,6 +15,8 @@ abstract class TestCase extends OrchestraTestCase
         Schema::create('test_models', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid');
+            $table->dateTime('start_date');
+            $table->dateTime('end_date');
             $table->softDeletes();
             $table->timestamps();
         });

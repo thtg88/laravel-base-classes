@@ -22,6 +22,12 @@ class TestModelFactory extends Factory
      */
     public function definition()
     {
-        return ['uuid' => (string) Str::uuid()];
+        return [
+            'end_date' => $this->faker->dateTime(),
+            'start_date' => function (array $data) {
+                return $this->faker->dateTime($data['end_date']);
+            },
+            'uuid' => (string) Str::uuid(),
+        ];
     }
 }
