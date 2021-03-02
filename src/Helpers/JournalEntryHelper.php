@@ -63,15 +63,18 @@ class JournalEntryHelper
         }
 
         if ($content === null) {
-            $data['content'] = null;
-        } else {
-            // Remove hidden attributes from being posted in the journals (e.g. password)
-            $content = $model === null ?
-                $content :
-                array_diff_key($content, array_flip($model->getHidden()));
-
-            $data['content'] = json_encode($content);
+            return $this->journal_entries->create($data);
         }
+
+        // Remove hidden attributes from being posted in the journals (e.g. password)
+        if ($model !== null) {
+            $content = array_diff_key(
+                $content,
+                array_flip($model->getHidden())
+            );
+        }
+
+        $data['content'] = json_encode($content);
 
         return $this->journal_entries->create($data);
     }
