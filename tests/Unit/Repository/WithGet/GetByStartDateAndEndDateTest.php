@@ -76,6 +76,8 @@ class GetByStartDateAndEndDateTest extends TestCase
      */
     public function date_filter_created_at_get_by_start_date_and_end_date_does_not_return_anything_if_no_models_within_start_and_end_dates(): void
     {
+        $models = TestModel::factory()->count(5)->create();
+
         $start = (new DateTime())->sub(new DateInterval('P10D'));
         $end = (new DateTime())->sub(new DateInterval('P1D'));
 
