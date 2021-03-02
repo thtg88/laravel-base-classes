@@ -42,7 +42,7 @@ class JournalEntryHelper
      */
     public function createJournalEntry(
         string $action,
-        ?Model $model,
+        ?Model $model = null,
         ?array $content = null
     ): JournalEntry {
         $target_table = $this->getTargetTable($model);
