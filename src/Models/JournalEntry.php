@@ -2,11 +2,15 @@
 
 namespace Thtg88\LaravelBaseClasses\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class JournalEntry extends Model
 {
+    use HasFactory;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -16,7 +20,6 @@ class JournalEntry extends Model
         'action',
         'content',
         'created_at',
-        'deleted_at',
         'target_id',
         'target_table',
         'updated_at',
@@ -30,7 +33,6 @@ class JournalEntry extends Model
      */
     protected $casts = [
         'created_at' => 'datetime',
-        'deleted_at' => 'datetime',
         'target_id'  => 'integer',
         'updated_at' => 'datetime',
         'user_id'    => 'integer',
