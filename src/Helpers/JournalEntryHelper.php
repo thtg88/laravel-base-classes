@@ -41,7 +41,7 @@ class JournalEntryHelper
      * @return \Thtg88\LaravelBaseClasses\Models\JournalEntry
      */
     public function createJournalEntry(
-        $action,
+        string $action,
         ?Model $model,
         ?array $content = null
     ): JournalEntry {
