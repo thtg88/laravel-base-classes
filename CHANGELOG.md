@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/) (or at least it tries to).
 
+## [0.5.0] - 2021-03-02
+## Added
+- Ability to set date filter columns at runtime for repository
+
 ## [0.4.0] - 2021-02-20
 ### Added
 - Default attributes to test model repository
