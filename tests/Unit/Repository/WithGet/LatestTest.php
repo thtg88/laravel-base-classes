@@ -112,7 +112,7 @@ class LatestTest extends TestCase
      * @test
      * @covers \Thtg88\LaravelBaseClasses\Repositories\Concerns\WithGet::latest
      */
-    public function latest_does_not_return_anything_if_limit_is_of_type_int(): void
+    public function latest_does_not_return_anything_if_limit_is_zero(): void
     {
         TestModel::factory()->count(3)->create();
 
