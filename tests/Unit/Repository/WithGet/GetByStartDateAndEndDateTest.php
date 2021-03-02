@@ -97,7 +97,7 @@ class GetByStartDateAndEndDateTest extends TestCase
     {
         $expected = TestModel::factory()->count(5)->create([
             'start_date' => now()->copy()->subHours(12)->toDateTimeString(),
-            'end_date' => now()->copy()->addHours(12)->toDateTimeString(),
+            'end_date'   => now()->copy()->addHours(12)->toDateTimeString(),
         ]);
 
         $start = (new DateTime())->sub(new DateInterval('P1D'));
