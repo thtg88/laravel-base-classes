@@ -19,7 +19,7 @@ class CreateJournalEntriesTable extends Migration
             $table->unsignedBigInteger('target_id')->nullable();
             $table->string('target_type')->nullable();
             $table->string('action')->nullable()->index();
-            $table->text('content')->nullable();
+            $table->jsonb('content')->nullable();
             $table->timestamps();
 
             $table->index(['target_id', 'target_type']);
