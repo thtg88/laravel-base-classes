@@ -53,20 +53,17 @@ trait WithGet
         DateTime $start_date,
         DateTime $end_date
     ): Collection {
-        $result = $this->model;
-
-        $result = $this->withOptionalTrashed($result);
-
         // Get total elements of the date filter columns array
         $total_date_filter_columns = count(static::$date_filter_columns);
 
         switch ($total_date_filter_columns) {
             case 0:
                 // Nothing to filter on
+                $result = $this->model;
                 break;
             case 1:
                 // The filter is applied in the form of $start_date <= $date_filter_columns[0] < $end_date
-                $result = $result->where(
+                $result = $this->model->where(
                     static::$date_filter_columns[0],
                     '>=',
                     $start_date->format('Y-m-d H:i:s')
@@ -81,7 +78,7 @@ trait WithGet
                 // Check if date intervals are overlapping (excluding the edges)
                 // $start_date < $date_filter_columns[0] &&
                 // $end_date > $date_filter_columns[1]
-                $result = $result->where(
+                $result = $this->model->where(
                     static::$date_filter_columns[0],
                     '<',
                     $end_date
@@ -92,6 +89,8 @@ trait WithGet
                 );
                 break;
         }
+
+        $result = $this->withOptionalTrashed($result);
 
         $result = $this->withDefaultOrderBy($result);
 
