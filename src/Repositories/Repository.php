@@ -147,6 +147,19 @@ abstract class Repository implements RepositoryInterface
     }
 
     /**
+     * Set the date filter columns in the current repository.
+     *
+     * @param array $date_filter_columns
+     * @return self
+     */
+    public function setDateFilterColumns(array $date_filter_columns): self
+    {
+        static::$date_filter_columns = $date_filter_columns;
+
+        return $this;
+    }
+
+    /**
      * Exclude a scope for the model in the current repository
      *
      * @return self
