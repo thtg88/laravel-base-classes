@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
+use Thtg88\LaravelBaseClasses\Database\Factories\UserFactory;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -71,5 +72,15 @@ class User extends Authenticatable implements MustVerifyEmail
     public function journal_entries(): MorphMany
     {
         return $this->morphMany(JournalEntry::class, 'target');
+    }
+
+    /**
+     * Create a new factory instance for the model.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    protected static function newFactory()
+    {
+        return UserFactory::new();
     }
 }
