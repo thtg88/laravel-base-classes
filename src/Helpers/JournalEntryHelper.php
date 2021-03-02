@@ -41,27 +41,12 @@ class JournalEntryHelper
      * @return \Thtg88\LaravelBaseClasses\Models\JournalEntry
      */
     public function createJournalEntry(
-        $action,
-        ?Model $model,
+        string $action,
+        ?Model $model = null,
         ?array $content = null
     ): JournalEntry {
-        $target_table = null;
-        $id = null;
-        if ($model !== null) {
-            // Get model class name
-            $class_name = get_class($model);
-
-            // Get morph map
-            $morph_map = Relation::morphMap();
-
-            // Get target table for model
-            $target_table = array_search($class_name, $morph_map);
-            if ($target_table === false) {
-                $target_table = null;
-            }
-
-            $id = $model->id;
-        }
+        $target_type = $this->getTargetType($model);
+        $id = $model->id ?? null;
 
         // Get current authenticated user
         $user = auth()->user();
@@ -69,7 +54,7 @@ class JournalEntryHelper
         // Build data array to save journal entry
         $data = [
             'target_id'    => $id,
-            'target_table' => $target_table,
+            'target_type' => $target_type,
             'action'       => $action,
         ];
 
@@ -78,16 +63,41 @@ class JournalEntryHelper
         }
 
         if ($content === null) {
-            $data['content'] = null;
-        } else {
-            // Remove hidden attributes from being posted in the journals (e.g. password)
-            $content = $model === null ?
-                $content :
-                array_diff_key($content, array_flip($model->getHidden()));
-
-            $data['content'] = json_encode($content);
+            return $this->journal_entries->create($data);
         }
 
+        // Remove hidden attributes from being posted in the journals (e.g. password)
+        if ($model !== null) {
+            $content = array_diff_key(
+                $content,
+                array_flip($model->getHidden())
+            );
+        }
+
+        $data['content'] = $content;
+
         return $this->journal_entries->create($data);
+    }
+
+    private function getTargetType(?Model $model): ?string
+    {
+        if ($model === null) {
+            return null;
+        }
+
+        // Get model class name
+        $class_name = get_class($model);
+
+        // Get morph map
+        $morph_map = Relation::morphMap();
+
+        // Get target table for model
+        $target_type = array_search($class_name, $morph_map);
+
+        if ($target_type === false) {
+            return null;
+        }
+
+        return $target_type;
     }
 }

@@ -89,7 +89,7 @@ trait WithCreate
                 'create-bulk',
                 null,
                 [
-                    'target_table' => $this->model->getTable(),
+                    'target_type'  => $this->model->getTable(),
                     'data'         => $data,
                 ]
             );
