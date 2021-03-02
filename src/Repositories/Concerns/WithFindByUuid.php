@@ -11,6 +11,7 @@ trait WithFindByUuid
      * Returns a model from a given id.
      *
      * @param string $uuid The UUID of the instance.
+     *
      * @return \Illuminate\Database\Eloquent\Model|null
      */
     public function findByUuid(string $uuid): ?Model

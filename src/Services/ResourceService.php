@@ -30,7 +30,8 @@ class ResourceService implements ResourceServiceInterface
      * Deletes a model instance from a given id.
      *
      * @param \Thtg88\LaravelBaseClasses\Http\Requests\Contracts\DestroyRequestInterface $request
-     * @param int $id The id of the model.
+     * @param int                                                                        $id      The id of the model.
+     *
      * @return \Illuminate\Database\Eloquent\Model|null
      */
     public function destroy(DestroyRequestInterface $request, int $id): ?Model
@@ -78,6 +79,7 @@ class ResourceService implements ResourceServiceInterface
      * Return all the model instances.
      *
      * @param \Thtg88\LaravelBaseClasses\Http\Requests\Contracts\IndexRequestInterface $request
+     *
      * @return \Illuminate\Pagination\LengthAwarePaginator
      */
     public function index(IndexRequestInterface $request): LengthAwarePaginator
@@ -96,13 +98,13 @@ class ResourceService implements ResourceServiceInterface
         $wheres = array_merge($wheres, $this->getFilterValues($request));
 
         // Page falls back to 1
-        if (! array_key_exists('page', $input) || $input['page'] === null) {
+        if (!array_key_exists('page', $input) || $input['page'] === null) {
             $input['page'] = 1;
         }
 
         // Page size fall back to configs
         if (
-            ! array_key_exists('page_size', $input) ||
+            !array_key_exists('page_size', $input) ||
             $input['page_size'] === null
         ) {
             $input['page_size'] = config('app.pagination.page_size');
@@ -115,9 +117,9 @@ class ResourceService implements ResourceServiceInterface
             $this->repository = $this->repository->withTrashed();
 
             $wheres[] = [
-                'field' => 'deleted_at',
+                'field'    => 'deleted_at',
                 'operator' => '<>',
-                'value' => null,
+                'value'    => null,
             ];
         }
 
@@ -146,7 +148,8 @@ class ResourceService implements ResourceServiceInterface
      * Restore a model instance from a given id.
      *
      * @param \Thtg88\LaravelBaseClasses\Http\Requests\Contracts\RestoreRequestInterface $request
-     * @param int $id The id of the model
+     * @param int                                                                        $id      The id of the model
+     *
      * @return \Illuminate\Database\Eloquent\Model|null
      */
     public function restore(RestoreRequestInterface $request, int $id): ?Model
@@ -158,6 +161,7 @@ class ResourceService implements ResourceServiceInterface
      * Return the model instances matching the given search query.
      *
      * @param \Thtg88\LaravelBaseClasses\Http\Requests\Contracts\SearchRequestInterface $request
+     *
      * @return \Illuminate\Database\Eloquent\Collection
      */
     public function search(SearchRequestInterface $request): Collection
@@ -172,6 +176,7 @@ class ResourceService implements ResourceServiceInterface
      * Returns a model from a given id.
      *
      * @param int $id The id of the instance.
+     *
      * @return \Illuminate\Database\Eloquent\Model|null
      */
     public function show(int $id): ?Model
@@ -183,6 +188,7 @@ class ResourceService implements ResourceServiceInterface
      * Create a new model instance in storage from the given request.
      *
      * @param \Thtg88\LaravelBaseClasses\Http\Requests\Contracts\StoreRequestInterface $request
+     *
      * @return \Illuminate\Database\Eloquent\Model|null
      */
     public function store(StoreRequestInterface $request): ?Model
@@ -197,7 +203,8 @@ class ResourceService implements ResourceServiceInterface
      * Updates a model instance with given request, and id.
      *
      * @param \Thtg88\LaravelBaseClasses\Http\Requests\Contracts\UpdateRequestInterface $request
-     * @param int $id The id of the model
+     * @param int                                                                       $id      The id of the model
+     *
      * @return \Illuminate\Database\Eloquent\Model|null
      */
     public function update(UpdateRequestInterface $request, int $id): ?Model

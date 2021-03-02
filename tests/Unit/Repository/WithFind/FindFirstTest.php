@@ -2,7 +2,6 @@
 
 namespace Tests\Unit\Repository\WithAllModels;
 
-use Illuminate\Database\Eloquent\Collection;
 use Tests\Unit\Repository\TestCase;
 use Thtg88\LaravelBaseClasses\Tests\TestClasses\Models\TestModel;
 

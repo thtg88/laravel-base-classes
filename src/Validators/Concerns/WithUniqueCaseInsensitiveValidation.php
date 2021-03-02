@@ -13,8 +13,9 @@ trait WithUniqueCaseInsensitiveValidation
      * If a database column is not specified, the attribute will be used.
      *
      * @param string $attribute
-     * @param mixed $value
-     * @param array $parameters
+     * @param mixed  $value
+     * @param array  $parameters
+     *
      * @return bool
      */
     public function validateUniqueCaseInsensitive(
@@ -22,7 +23,7 @@ trait WithUniqueCaseInsensitiveValidation
         $value,
         array $parameters
     ): bool {
-        if (! is_string($value)) {
+        if (!is_string($value)) {
             return false;
         }
 
@@ -40,7 +41,7 @@ trait WithUniqueCaseInsensitiveValidation
         if (isset($parameters[2])) {
             [$idColumn, $id] = $this->getUniqueIds($idColumn, $parameters);
 
-            if (! is_null($id)) {
+            if (!is_null($id)) {
                 $id = stripslashes($id);
             }
         }

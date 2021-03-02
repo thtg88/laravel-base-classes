@@ -2,9 +2,9 @@
 
 namespace Thtg88\LaravelBaseClasses\Http\Middleware;
 
-use Thtg88\LaravelBaseClasses\BasicAuthShield;
 use Closure;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
+use Thtg88\LaravelBaseClasses\BasicAuthShield;
 
 class BasicAuthMiddleware
 {
@@ -19,6 +19,7 @@ class BasicAuthMiddleware
      * Create a new middleware class.
      *
      * @param \Thtg88\LaravelBaseClasses\BasicAuthShield $shield
+     *
      * @return void
      */
     public function __construct(BasicAuthShield $shield)
@@ -30,8 +31,8 @@ class BasicAuthMiddleware
      * Handle an incoming request.
      *
      * @param \Illuminate\Http\Request $request
-     * @param \Closure $next
-     * @param string|null $user
+     * @param \Closure                 $next
+     * @param string|null              $user
      *
      * @return mixed
      */

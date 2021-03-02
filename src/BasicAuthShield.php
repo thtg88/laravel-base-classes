@@ -25,7 +25,9 @@ class BasicAuthShield extends Shield
      * @param string|null $username
      * @param string|null $password
      * @param string|null $user
+     *
      * @throws \Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException
+     *
      * @return bool
      */
     public function verify(

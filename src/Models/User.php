@@ -12,7 +12,9 @@ use Illuminate\Support\Facades\Hash;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use HasFactory, Notifiable, SoftDeletes;
+    use HasFactory;
+    use Notifiable;
+    use SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -46,10 +48,10 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $casts = [
-        'created_at' => 'datetime',
-        'deleted_at' => 'datetime',
+        'created_at'        => 'datetime',
+        'deleted_at'        => 'datetime',
         'email_verified_at' => 'datetime',
-        'updated_at' => 'datetime',
+        'updated_at'        => 'datetime',
     ];
 
     // MUTATORS

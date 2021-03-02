@@ -3,7 +3,6 @@
 namespace Thtg88\LaravelBaseClasses\Http\Controllers\Web;
 
 use Closure;
-use Illuminate\Container\Container;
 use Illuminate\Support\Str;
 use Thtg88\LaravelBaseClasses\Helpers\DownloadCsvHelper;
 use Thtg88\LaravelBaseClasses\Http\Controllers\ResourceController as BaseResourceController;
@@ -32,7 +31,8 @@ class ResourceController extends BaseResourceController
      * Remove the specified resource from storage.
      *
      * @param \Thtg88\LaravelBaseClasses\Http\Requests\Contracts\DestroyRequestInterface $request
-     * @param int $id
+     * @param int                                                                        $id
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(DestroyRequestInterface $request, $id)
@@ -48,6 +48,7 @@ class ResourceController extends BaseResourceController
      * Store a newly created resource in storage.
      *
      * @param \Thtg88\LaravelBaseClasses\Http\Requests\Contracts\StoreRequestInterface $request
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(StoreRequestInterface $request)
@@ -63,7 +64,8 @@ class ResourceController extends BaseResourceController
      * Update the specified resource in storage.
      *
      * @param \Thtg88\LaravelBaseClasses\Http\Requests\Contracts\UpdateRequestInterface $request
-     * @param int $id
+     * @param int                                                                       $id
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function update(UpdateRequestInterface $request, $id)
@@ -79,6 +81,7 @@ class ResourceController extends BaseResourceController
      * Download a listing of all the resources in CSV format.
      *
      * @param \Thtg88\LaravelBaseClasses\Http\Requests\DownloadCsvRequest $request
+     *
      * @return \Symfony\Component\HttpFoundation\StreamedResponse
      */
     public function downloadCsv(DownloadCsvRequest $request)
@@ -97,11 +100,11 @@ class ResourceController extends BaseResourceController
         $filename = $this->service->getName().'-'.now()->format('Y-m-d\TH_i_s').'.csv';
 
         $headers = [
-            'Cache-Control' => 'must-revalidate, post-check=0, pre-check=0',
-            'Content-type' => 'text/csv',
+            'Cache-Control'       => 'must-revalidate, post-check=0, pre-check=0',
+            'Content-type'        => 'text/csv',
             'Content-Disposition' => 'attachment; filename='.$filename,
-            'Expires' => '0',
-            'Pragma' => 'public',
+            'Expires'             => '0',
+            'Pragma'              => 'public',
         ];
 
         // return $callback();

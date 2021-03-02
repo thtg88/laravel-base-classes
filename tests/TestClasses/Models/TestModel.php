@@ -31,7 +31,7 @@ class TestModel extends Model
     protected $casts = [
         'created_at' => 'datetime',
         'deleted_at' => 'datetime',
-        'end_date' => 'datetime',
+        'end_date'   => 'datetime',
         'start_date' => 'datetime',
         'updated_at' => 'datetime',
     ];

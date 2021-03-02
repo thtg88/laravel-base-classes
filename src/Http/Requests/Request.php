@@ -90,6 +90,7 @@ class Request extends FormRequest
      * Optionally include a trashed resource in the query.
      *
      * @param bool $with_trashed
+     *
      * @return \Illuminate\Database\Eloquent\Model|null
      */
     protected function findResource($with_trashed = false): ?Model

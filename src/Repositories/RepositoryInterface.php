@@ -56,6 +56,7 @@ interface RepositoryInterface
      * Create a new model instance in storage from the given data array.
      *
      * @param array $data
+     *
      * @return \Illuminate\Database\Eloquent\Model
      */
     public function create(array $data): ?Model;
@@ -64,6 +65,7 @@ interface RepositoryInterface
      * Deletes a model instance from a given id.
      *
      * @param int $id The id of the model.
+     *
      * @return \Illuminate\Database\Eloquent\Model
      */
     public function destroy(int $id): ?Model;
@@ -72,6 +74,7 @@ interface RepositoryInterface
      * Returns a model from a given id.
      *
      * @param int $id The id of the instance.
+     *
      * @return \Illuminate\Database\Eloquent\Model
      */
     public function find(int $id): ?Model;
@@ -80,6 +83,7 @@ interface RepositoryInterface
      * Returns a model from a given model name.
      *
      * @param mixed $model_name The model name of the instance.
+     *
      * @return \Illuminate\Database\Eloquent\Model
      * @TODO expand to include multiple column functionality. Perhaps allow array, with separator additional parameter, or closure.
      */
@@ -110,6 +114,7 @@ interface RepositoryInterface
      * Return all the resources from given ids.
      *
      * @param int $ids The ids of the resources to return.
+     *
      * @return \Illuminate\Database\Eloquent\Collection
      */
     public function getByIds(array $ids): Collection;
@@ -127,7 +132,8 @@ interface RepositoryInterface
      * are ignored, and scenario 2 applies.
      *
      * @param \DateTime $start_date The start date.
-     * @param \DateTime $end_date The end date.
+     * @param \DateTime $end_date   The end date.
+     *
      * @return \Illuminate\Database\Eloquent\Collection
      */
     public function getByStartDateAndEndDate(
@@ -139,6 +145,7 @@ interface RepositoryInterface
      * Return the given number of latest inserted model instances.
      *
      * @param int $limit The number of model instances to return.
+     *
      * @return \Illuminate\Database\Eloquent\Collection
      */
     public function latest(int $limit): Collection;
@@ -146,12 +153,13 @@ interface RepositoryInterface
     /**
      * Return the paginated model instances.
      *
-     * @param int $page_size The number of model instances to return per page
-     * @param int|null $page The page number
-     * @param string $q The optional search query
-     * @param string|null $sort_column The optional sort column
+     * @param int         $page_size      The number of model instances to return per page
+     * @param int|null    $page           The page number
+     * @param string      $q              The optional search query
+     * @param string|null $sort_column    The optional sort column
      * @param string|null $sort_direction The optional sort direction
-     * @param array $wheres Additional where clauses
+     * @param array       $wheres         Additional where clauses
+     *
      * @return \Illuminate\Pagination\LengthAwarePaginator
      */
     public function paginate(
@@ -167,6 +175,7 @@ interface RepositoryInterface
      * Restore a model instance from a given id.
      *
      * @param int $id The id of the model
+     *
      * @return \Illuminate\Database\Eloquent\Model
      */
     public function restore(int $id): ?Model;
@@ -175,6 +184,7 @@ interface RepositoryInterface
      * Return the model instances matching the given search query.
      *
      * @param string|null $q The search query.
+     *
      * @return \Illuminate\Database\Eloquent\Collection
      */
     public function search(?string $q): Collection;
@@ -182,8 +192,9 @@ interface RepositoryInterface
     /**
      * Updates a model instance with given data, from a given id.
      *
-     * @param int $id The id of the model
+     * @param int   $id   The id of the model
      * @param array $data
+     *
      * @return \Illuminate\Database\Eloquent\Model
      */
     public function update(int $id, array $data): ?Model;

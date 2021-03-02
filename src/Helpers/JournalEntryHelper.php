@@ -2,10 +2,10 @@
 
 namespace Thtg88\LaravelBaseClasses\Helpers;
 
-use Thtg88\LaravelBaseClasses\Models\JournalEntry;
-use Thtg88\LaravelBaseClasses\Repositories\JournalEntryRepository;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
+use Thtg88\LaravelBaseClasses\Models\JournalEntry;
+use Thtg88\LaravelBaseClasses\Repositories\JournalEntryRepository;
 
 /**
  * Helper methods for journal entry.
@@ -23,6 +23,7 @@ class JournalEntryHelper
      * Create a new helper instance.
      *
      * @param \Thtg88\LaravelBaseClasses\Repositories\JournalEntryRepository $journal_entries
+     *
      * @return void
      */
     public function __construct(JournalEntryRepository $journal_entries)
@@ -33,9 +34,10 @@ class JournalEntryHelper
     /**
      * Create a new journal entry instance in storage.
      *
-     * @param string $action The action performing while creating the entry.
-     * @param \Illuminate\Database\Eloquent\Model|null $model The model the action is performed on.
-     * @param array $content The action content data.
+     * @param string                                   $action  The action performing while creating the entry.
+     * @param \Illuminate\Database\Eloquent\Model|null $model   The model the action is performed on.
+     * @param array                                    $content The action content data.
+     *
      * @return \Thtg88\LaravelBaseClasses\Models\JournalEntry
      */
     public function createJournalEntry(
@@ -66,9 +68,9 @@ class JournalEntryHelper
 
         // Build data array to save journal entry
         $data = [
-            'target_id' => $id,
+            'target_id'    => $id,
             'target_table' => $target_table,
-            'action' => $action,
+            'action'       => $action,
         ];
 
         if ($user !== null) {

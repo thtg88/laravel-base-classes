@@ -11,6 +11,7 @@ class Rule extends BaseRule
      *
      * @param string $table
      * @param string $column
+     *
      * @return \Thtg88\LaravelBaseClasses\Rules\UniqueCaseInsensitive
      */
     public static function uniqueCaseInsensitive(

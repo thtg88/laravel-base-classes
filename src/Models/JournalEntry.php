@@ -2,8 +2,8 @@
 
 namespace Thtg88\LaravelBaseClasses\Models;
 
-use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class JournalEntry extends Model
 {
@@ -31,9 +31,9 @@ class JournalEntry extends Model
     protected $casts = [
         'created_at' => 'datetime',
         'deleted_at' => 'datetime',
-        'target_id' => 'integer',
+        'target_id'  => 'integer',
         'updated_at' => 'datetime',
-        'user_id' => 'integer',
+        'user_id'    => 'integer',
     ];
 
     // RELATIONSHIPS

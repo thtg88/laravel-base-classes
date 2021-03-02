@@ -13,6 +13,7 @@ trait WithCreate
      * Create a new model instance in storage from the given data array.
      *
      * @param array $data
+     *
      * @return \Illuminate\Database\Eloquent\Model
      */
     public function create(array $data): Model
@@ -44,6 +45,7 @@ trait WithCreate
      * Returns true on success, false on failure.
      *
      * @param array $data
+     *
      * @return bool
      */
     public function createBulk(array $data): bool
@@ -88,7 +90,7 @@ trait WithCreate
                 null,
                 [
                     'target_table' => $this->model->getTable(),
-                    'data' => $data,
+                    'data'         => $data,
                 ]
             );
         }

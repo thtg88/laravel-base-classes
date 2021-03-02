@@ -11,6 +11,7 @@ trait WithGet
      * Return all the resources from given ids.
      *
      * @param array $ids The ids of the resources to return.
+     *
      * @return \Illuminate\Database\Eloquent\Collection
      */
     public function getByIds(array $ids): Collection
@@ -18,7 +19,7 @@ trait WithGet
         // Filter out empty and non-numeric ids
         // If no ids, return empty set
         $ids = array_filter($ids, static function ($id) {
-            return is_numeric($id) && ! empty($id);
+            return is_numeric($id) && !empty($id);
         });
         if (empty($ids)) {
             return new Collection();
@@ -46,7 +47,8 @@ trait WithGet
      * are ignored, and scenario 2 applies.
      *
      * @param \DateTime $start_date The start date.
-     * @param \DateTime $end_date The end date.
+     * @param \DateTime $end_date   The end date.
+     *
      * @return \Illuminate\Database\Eloquent\Collection
      */
     public function getByStartDateAndEndDate(
@@ -101,12 +103,13 @@ trait WithGet
      * Return the given number of latest inserted model instances.
      *
      * @param int $limit The number of model instances to return.
+     *
      * @return \Illuminate\Database\Eloquent\Collection
      */
     public function latest($limit): Collection
     {
         // Assume limit as numeric and > 0
-        if (empty($limit) || ! is_numeric($limit) || $limit <= 0) {
+        if (empty($limit) || !is_numeric($limit) || $limit <= 0) {
             return new Collection();
         }
 

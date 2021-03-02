@@ -10,6 +10,7 @@ trait WithPagination
      * Return the map of filter values from a given request.
      *
      * @param \Thtg88\LaravelBaseClasses\Http\Requests\Contracts\IndexRequestInterface $request
+     *
      * @return array
      */
     public function getMapFilterValues(IndexRequestInterface $request): array
@@ -21,7 +22,7 @@ trait WithPagination
 
                 $data = [
                     'operator' => $filter['operator'],
-                    'value' => $filter['value'],
+                    'value'    => $filter['value'],
                 ];
 
                 if (array_key_exists('relationship-field', $filter)) {
@@ -58,13 +59,14 @@ trait WithPagination
      * Return the filter values from a given request.
      *
      * @param \Thtg88\LaravelBaseClasses\Http\Requests\Contracts\IndexRequestInterface $request
+     *
      * @return array
      */
     public function getFilterValues(IndexRequestInterface $request): array
     {
         $filters = $this->getDefaultFilterValues();
 
-        if (! is_array($request->filters)) {
+        if (!is_array($request->filters)) {
             return $filters;
         }
 
@@ -99,9 +101,9 @@ trait WithPagination
             );
 
             $filter_data = [
-                'name' => $filter['name'],
+                'name'     => $filter['name'],
                 'operator' => $filter['operator'],
-                'value' => $filter['value'],
+                'value'    => $filter['value'],
             ];
             if (array_key_exists('relationship-field', $filter)) {
                 $filter_data['relationship-field'] = $filter['relationship-field'];
@@ -120,11 +122,12 @@ trait WithPagination
      * Return the search value from a given request.
      *
      * @param \Thtg88\LaravelBaseClasses\Http\Requests\Contracts\IndexRequestInterface $request
+     *
      * @return string|null
      */
     public function getSearchValue(IndexRequestInterface $request): ?string
     {
-        if (empty($request->q) || ! is_string($request->q)) {
+        if (empty($request->q) || !is_string($request->q)) {
             return null;
         }
 
@@ -135,6 +138,7 @@ trait WithPagination
      * Return the page size value from a given request.
      *
      * @param \Thtg88\LaravelBaseClasses\Http\Requests\Contracts\IndexRequestInterface $request
+     *
      * @return int|null
      */
     public function getPageSize(IndexRequestInterface $request): ?int
@@ -153,6 +157,7 @@ trait WithPagination
      * Return the sort from a given request.
      *
      * @param \Thtg88\LaravelBaseClasses\Http\Requests\Contracts\IndexRequestInterface $request
+     *
      * @return array
      */
     public function getSort(IndexRequestInterface $request): array
@@ -164,26 +169,26 @@ trait WithPagination
         if (count($default_order_by_columns) === 0) {
             return [
                 'direction' => 'asc',
-                'name' => 'id',
+                'name'      => 'id',
             ];
         }
 
         // If no valid sort name and direction provided, sorted by default
         if (
             empty($request->sort_name) ||
-            ! is_string($request->sort_name) ||
+            !is_string($request->sort_name) ||
             empty($request->sort_direction) ||
-            ! is_string($request->sort_direction)
+            !is_string($request->sort_direction)
         ) {
             return [
                 'direction' => array_values($default_order_by_columns)[0],
-                'name' => array_keys($default_order_by_columns)[0],
+                'name'      => array_keys($default_order_by_columns)[0],
             ];
         }
 
         return [
             'direction' => $request->sort_direction,
-            'name' => $request->sort_name,
+            'name'      => $request->sort_name,
         ];
     }
 
@@ -191,15 +196,16 @@ trait WithPagination
      * Return the pagination data from a given request.
      *
      * @param \Thtg88\LaravelBaseClasses\Http\Requests\Contracts\IndexRequestInterface $request
+     *
      * @return array
      */
     public function getPaginationData(IndexRequestInterface $request): array
     {
         return [
-            'filter_map' => $this->getMapFilterValues($request),
-            'page_size' => $this->getPageSize($request),
+            'filter_map'   => $this->getMapFilterValues($request),
+            'page_size'    => $this->getPageSize($request),
             'search_value' => $this->getSearchValue($request),
-            'sort' => $this->getSort($request),
+            'sort'         => $this->getSort($request),
         ];
     }
 }

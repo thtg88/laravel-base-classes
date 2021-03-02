@@ -11,6 +11,7 @@ trait WithSearch
      * Return the model instances matching the given search query.
      *
      * @param string|null $q The search query.
+     *
      * @return \Illuminate\Database\Eloquent\Collection
      */
     public function search(?string $q): Collection
@@ -24,7 +25,7 @@ trait WithSearch
         // If no search columns provided
         // Return empty collection
         if (
-            ! is_array(static::$search_columns) ||
+            !is_array(static::$search_columns) ||
             count(static::$search_columns) <= 0
         ) {
             return new Collection();
@@ -49,7 +50,8 @@ trait WithSearch
      * from a given existing query builder, and a search query string.
      *
      * @param \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model $builder
-     * @param string $q
+     * @param string                                                                    $q
+     *
      * @return \Illuminate\Database\Query\Builder
      */
     protected function searchQuery($builder, string $q)
@@ -69,8 +71,9 @@ trait WithSearch
      * from a given existing query builder, a search query string, and a column.
      *
      * @param \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model $builder
-     * @param string $q
-     * @param string $column
+     * @param string                                                                    $q
+     * @param string                                                                    $column
+     *
      * @return \Illuminate\Database\Query\Builder
      */
     protected function searchQueryColumn($builder, string $q, string $column)
