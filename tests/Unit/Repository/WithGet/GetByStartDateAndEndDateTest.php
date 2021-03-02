@@ -93,9 +93,12 @@ class GetByStartDateAndEndDateTest extends TestCase
      * @test
      * @covers \Thtg88\LaravelBaseClasses\Repositories\Concerns\WithGet::getByStartDateAndEndDate
      */
-    public function date_filter_start_date_and_end_date_get_by_start_date_and_end_date_returns_specified_amount_of_models(): void
+    public function date_filter_start_date_and_end_date_get_by_start_date_and_end_date_returns_all_models(): void
     {
-        $expected = TestModel::factory()->count(5)->create();
+        $expected = TestModel::factory()->count(5)->create([
+            'start_date' => now()->copy()->subHours(12)->toDateTimeString(),
+            'end_date' => now()->copy()->addHours(12)->toDateTimeString(),
+        ]);
 
         $start = (new DateTime())->sub(new DateInterval('P1D'));
         $end = (new DateTime())->add(new DateInterval('P1D'));
@@ -161,6 +164,11 @@ class GetByStartDateAndEndDateTest extends TestCase
      */
     public function date_filter_start_date_and_end_date_get_by_start_date_and_end_date_does_not_return_anything_if_no_models_within_start_and_end_dates(): void
     {
+        $models = TestModel::factory()->count(5)->create([
+            'start_date' => now()->copy()->addDays(1)->toDateTimeString(),
+            'start_date' => now()->copy()->addDays(10)->toDateTimeString(),
+        ]);
+
         $start = (new DateTime())->sub(new DateInterval('P10D'));
         $end = (new DateTime())->sub(new DateInterval('P1D'));
 
