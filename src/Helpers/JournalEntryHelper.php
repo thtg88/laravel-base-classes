@@ -45,23 +45,8 @@ class JournalEntryHelper
         ?Model $model,
         ?array $content = null
     ): JournalEntry {
-        $target_table = null;
-        $id = null;
-        if ($model !== null) {
-            // Get model class name
-            $class_name = get_class($model);
-
-            // Get morph map
-            $morph_map = Relation::morphMap();
-
-            // Get target table for model
-            $target_table = array_search($class_name, $morph_map);
-            if ($target_table === false) {
-                $target_table = null;
-            }
-
-            $id = $model->id;
-        }
+        $target_table = $this->getTargetTable($model);
+        $id = $model->id ?? null;
 
         // Get current authenticated user
         $user = auth()->user();
@@ -89,5 +74,27 @@ class JournalEntryHelper
         }
 
         return $this->journal_entries->create($data);
+    }
+
+    private function getTargetTable(?Model $model): ?string
+    {
+        if ($model === null) {
+            return null;
+        }
+
+        // Get model class name
+        $class_name = get_class($model);
+
+        // Get morph map
+        $morph_map = Relation::morphMap();
+
+        // Get target table for model
+        $target_table = array_search($class_name, $morph_map);
+
+        if ($target_table === false) {
+            return null;
+        }
+
+        return $target_table;
     }
 }
