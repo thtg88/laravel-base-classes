@@ -22,6 +22,13 @@ class LaravelBaseClassesServiceProvider extends ServiceProvider
                 ->configPath('base-classes.php'),
         ], 'base-classes-config');
 
+        // Migrations
+        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+        $this->publishes([
+            __DIR__.'/../database/migrations' => Container::getInstance()
+                ->databasePath('migrations'),
+        ], 'base-classes-migrations');
+
         // Register custom validator
         // app('validator')->resolver(static function ($translator, $data, $rules, $messages) {
         //     return new Validator($translator, $data, $rules, $messages);
