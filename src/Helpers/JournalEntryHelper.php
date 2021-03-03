@@ -48,15 +48,15 @@ class JournalEntryHelper
         $target_type = $this->getTargetType($model);
         $id = $model->id ?? null;
 
-        // Get current authenticated user
-        $user = auth()->user();
-
         // Build data array to save journal entry
         $data = [
             'target_id'    => $id,
             'target_type'  => $target_type,
             'action'       => $action,
         ];
+
+        // Get current authenticated user
+        $user = auth()->user();
 
         if ($user !== null) {
             $data['user_id'] = $user->id;
