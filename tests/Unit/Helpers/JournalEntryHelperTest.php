@@ -27,9 +27,6 @@ class JournalEntryHelperTest extends TestCase
 
         $this->helper = app()->make(JournalEntryHelper::class);
         $this->model = TestModel::factory()->create();
-
-        // This is so that the correct target type can be set on journal entries table
-        Relation::morphMap(['test_models' => TestModel::class]);
     }
 
     /**
@@ -99,6 +96,9 @@ class JournalEntryHelperTest extends TestCase
      */
     public function with_model_set_target_id_and_target_type_test(): void
     {
+        // This is so that the correct target type can be set on journal entries table
+        Relation::morphMap(['test_models' => TestModel::class]);
+
         $actual = $this->helper->createJournalEntry(
             'ABCD',
             $this->model
@@ -112,6 +112,29 @@ class JournalEntryHelperTest extends TestCase
         $this->assertTrue($actual->target->is($this->model));
         $this->assertEquals($this->model->id, $actual->target_id);
         $this->assertEquals($this->model->getTable(), $actual->target->getTable());
+    }
+
+    /**
+     * @test
+     * @covers \Thtg88\LaravelBaseClasses\Helpers\JournalEntryHelper::createJournalEntry
+     */
+    public function with_model_not_in_relation_morph_map_do_not_set_target_id_and_target_type_test(): void
+    {
+        // Reset morph map
+        Relation::morphMap([], false);
+
+        $actual = $this->helper->createJournalEntry(
+            'ABCD',
+            $this->model
+        );
+
+        $this->assertNotNull($actual);
+        $this->assertInstanceOf(JournalEntry::class, $actual);
+        // If the model has not been added to the Relation::morphMap
+        // It won't set the target
+        $this->assertNull($actual->target_id);
+        $this->assertNull($actual->target_type);
+        $this->assertNull($actual->target);
     }
 
     /**
