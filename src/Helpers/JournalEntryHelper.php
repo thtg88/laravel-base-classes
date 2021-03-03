@@ -46,7 +46,7 @@ class JournalEntryHelper
         ?array $content = null
     ): JournalEntry {
         $target_type = $this->getTargetType($model);
-        $id = $model->id ?? null;
+        $id = $this->getTargetId($model, $target_type);
 
         // Build data array to save journal entry
         $data = [
@@ -77,6 +77,19 @@ class JournalEntryHelper
         $data['content'] = $content;
 
         return $this->journal_entries->create($data);
+    }
+
+    private function getTargetId(?Model $model, ?string $target_type): ?int
+    {
+        if ($target_type === null) {
+            return null;
+        }
+
+        if ($model === null) {
+            return null;
+        }
+
+        return $model->id;
     }
 
     private function getTargetType(?Model $model): ?string
