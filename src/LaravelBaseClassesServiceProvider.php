@@ -4,6 +4,7 @@ namespace Thtg88\LaravelBaseClasses;
 
 use Illuminate\Container\Container;
 use Illuminate\Support\ServiceProvider;
+use Thtg88\Journalism\Helpers\JournalEntryHelper;
 use Thtg88\LaravelBaseClasses\Validators\Validator;
 
 class LaravelBaseClassesServiceProvider extends ServiceProvider
