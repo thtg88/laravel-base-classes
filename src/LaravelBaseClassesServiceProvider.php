@@ -4,7 +4,6 @@ namespace Thtg88\LaravelBaseClasses;
 
 use Illuminate\Container\Container;
 use Illuminate\Support\ServiceProvider;
-use Thtg88\LaravelBaseClasses\Helpers\JournalEntryHelper;
 use Thtg88\LaravelBaseClasses\Validators\Validator;
 
 class LaravelBaseClassesServiceProvider extends ServiceProvider
@@ -48,8 +47,8 @@ class LaravelBaseClassesServiceProvider extends ServiceProvider
         );
 
         // Register journal entry helper singleton
-        // $this->app->singleton(JournalEntryHelper::class, static function ($app) {
-        //     return $app->make(JournalEntryHelper::class);
-        // });
+        $this->app->singleton(JournalEntryHelper::class, static function ($app) {
+            return $app->make(JournalEntryHelper::class);
+        });
     }
 }

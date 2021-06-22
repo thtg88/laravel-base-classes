@@ -2,7 +2,7 @@
 
 namespace Thtg88\LaravelBaseClasses\Repositories;
 
-use Thtg88\LaravelBaseClasses\Models\JournalEntry;
+use Thtg88\Journalism\Models\JournalEntry;
 
 class JournalEntryRepository extends Repository
 {
@@ -23,7 +23,7 @@ class JournalEntryRepository extends Repository
     /**
      * Create a new repository instance.
      *
-     * @param \Thtg88\LaravelBaseClasses\Models\JournalEntry $journal_entry
+     * @param \Thtg88\Journalism\Models\JournalEntry $journal_entry
      *
      * @return void
      */
