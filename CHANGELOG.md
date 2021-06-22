@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/) (or at least it tries to).
 
+## [0.9.0] - 2021-06-22
+### Removed
+- JournalEntryHelper implementation, now moved to https://github.com/thtg88/journalism
+
 ## [0.8.0] - 2021-03-02
 ### Added
 - Migrations are now exposed to be loaded or published
