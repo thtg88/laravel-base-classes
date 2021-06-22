@@ -3,8 +3,8 @@
 namespace Thtg88\LaravelBaseClasses\Repositories\Concerns;
 
 use Illuminate\Database\Eloquent\Model;
-use Thtg88\LaravelBaseClasses\Helpers\JournalEntryHelper;
-use Thtg88\LaravelBaseClasses\Models\JournalEntry;
+use Thtg88\Journalism\Helpers\JournalEntryHelper;
+use Thtg88\Journalism\Models\JournalEntry;
 
 trait WithUpdate
 {
@@ -37,7 +37,7 @@ trait WithUpdate
 
         // Create journal entry only if not creating journal entry i.e. infinite recursion
         if (
-            config('base-classes.journal_mode') === true &&
+            config('journalism.enabled') === true &&
             !($model instanceof JournalEntry)
         ) {
             app(JournalEntryHelper::class)->createJournalEntry(
