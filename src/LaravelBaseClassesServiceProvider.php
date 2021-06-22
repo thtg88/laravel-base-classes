@@ -49,7 +49,7 @@ class LaravelBaseClassesServiceProvider extends ServiceProvider
 
         // Register journal entry helper singleton
         $this->app->singleton(JournalEntryHelper::class, static function ($app) {
-            return $app->make(JournalEntryHelper::class);
+            return new JournalEntryHelper();
         });
     }
 }
